@@ -2,7 +2,7 @@ export const Room = () => {
     return (
         <>
             {/* Floor */}
-            <mesh position={[0, 0, 0]} receiveShadow>
+            <mesh position={[0, 0, 0]}>
                 <boxGeometry args={[10, 0.1, 10]} />
                 <meshStandardMaterial color="#ffffff" />
             </mesh>
