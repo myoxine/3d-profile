@@ -34,6 +34,7 @@ export const Wall = ({ position, size = [10, 5, 0.1] }: WallProps) => {
         normalMap={normalMap}
         displacementMap={displacementMap}
         displacementScale={0}
+        color={'white'}
       />
     </mesh>
   )
