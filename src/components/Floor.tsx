@@ -5,7 +5,7 @@ interface FloorProps {
     size?: [number, number, number]
 }
 
-export const Floor = ({ position = [0, 0.05, 0], size = [10, 0.1, 10] }: FloorProps) => {
+export const Floor = ({ position = [0, 0.05, 0], size = [3, 0.1, 3] }: FloorProps) => {
     const [
         colorMap,
         roughnessMap,
@@ -23,7 +23,7 @@ export const Floor = ({ position = [0, 0.05, 0], size = [10, 0.1, 10] }: FloorPr
         // Make the texture repeat across the floor
         ;[colorMap, roughnessMap, normalMap, displacementMap, aoMap].forEach(tex => {
             tex.wrapS = tex.wrapT = THREE.RepeatWrapping
-            tex.repeat.set(2, 2)
+            tex.repeat.set(1, 1)
         })
 
     return (
