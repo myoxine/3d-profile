@@ -1,7 +1,6 @@
 import React from 'react'
 import type { ThreeElements } from '@react-three/fiber'
 import { MeshReflectorMaterial } from '@react-three/drei'
-import * as THREE from 'three'
 
 type GroupProps = ThreeElements['group']
 
