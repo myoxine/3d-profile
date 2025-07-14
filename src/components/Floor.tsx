@@ -5,7 +5,7 @@ interface FloorProps {
     size?: [number, number, number]
 }
 
-export const Floor = ({ position = [0, 0.05, 0], size = [3, 0.1, 3] }: FloorProps) => {
+export const Floor = ({ position = [0, 0.05, 0], size = [3.05, 0.1, 3.05] }: FloorProps) => {
     const [
         colorMap,
         roughnessMap,
@@ -27,7 +27,7 @@ export const Floor = ({ position = [0, 0.05, 0], size = [3, 0.1, 3] }: FloorProp
         })
 
     return (
-        <mesh position={position} receiveShadow>
+        <mesh position={position} castShadow receiveShadow>
             <boxGeometry args={size} />
             <meshStandardMaterial
                 map={colorMap}

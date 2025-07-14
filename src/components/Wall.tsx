@@ -2,21 +2,19 @@ import * as THREE from 'three'
 import { useMemo, useRef } from 'react'
 import { Mesh } from 'three'
 import { useTexture } from '@react-three/drei'
+import type { JSX } from 'react'
 
-export interface WallProps {
-  position?: [number, number, number]
+export type WallProps = JSX.IntrinsicElements['group'] & {
   wallSize?: [number, number]
   holeSize?: [number, number]    // optional lubang
   holePosition?: [number, number] // optional offset lubang
-  rotationY?: number
 }
 
 export const Wall = ({
-  position = [0, 0, 0],
   wallSize = [10, 5],
   holeSize,
-  holePosition = [0, 0],
-  rotationY = 0
+  holePosition = [0, 0], 
+  ...props
 }: WallProps) => {
   const meshRef = useRef<Mesh>(null!)
 
@@ -82,33 +80,35 @@ export const Wall = ({
     '/textures/Plaster001_1K-JPG_Displacement.jpg'
   ])
 
-  ;[
-    colorMap,
-    roughnessMap,
-    normalMap,
-    displacementMap
-  ].forEach(tex => {
-    tex.wrapS = tex.wrapT = THREE.RepeatWrapping
-    tex.repeat.set(0.2, 0.2)
-  })
+    ;[
+      colorMap,
+      roughnessMap,
+      normalMap,
+      displacementMap
+    ].forEach(tex => {
+      tex.wrapS = tex.wrapT = THREE.RepeatWrapping
+      tex.repeat.set(0.2, 0.2)
+    })
 
   return (
-    <mesh
-      ref={meshRef}
-      geometry={wallGeometry}
-      position={position}
-      rotation-y={rotationY}
-      receiveShadow
-      castShadow
-    >
-      <meshStandardMaterial
-        map={colorMap}
-        roughnessMap={roughnessMap}
-        normalMap={normalMap}
-        displacementMap={displacementMap}
-        displacementScale={0}
-        color={'white'}
-      />
-    </mesh>
+    <group {...props} dispose={null}>
+      <mesh
+        ref={meshRef}
+        geometry={wallGeometry}
+        position={[0,0,-0.05]}
+        // rotation-y={rotationY}
+        receiveShadow
+        castShadow
+      >
+        <meshStandardMaterial
+          map={colorMap}
+          roughnessMap={roughnessMap}
+          normalMap={normalMap}
+          displacementMap={displacementMap}
+          displacementScale={0}
+          color={'white'}
+        />
+      </mesh>
+    </group>
   )
 }
