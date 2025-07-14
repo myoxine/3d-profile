@@ -85,14 +85,13 @@ export const Window: React.FC<WindowProps> = ({
       <mesh>
         <planeGeometry args={[width, height]} />
         <MeshReflectorMaterial
-          color={"#ffffff"}
-          opacity={0.5} // Adjust opacity as needed
+          opacity={0.7} // Adjust opacity as needed
           transparent={true}
           blur={[0, 0]} // Blur ground reflections (width, height), 0 skips blur
           mixBlur={0} // How much blur mixes with surface roughness (default = 1)
           mixStrength={1} // Strength of the reflections
           mixContrast={1} // Contrast of the reflections
-          resolution={256} // Off-buffer resolution, lower=faster, higher=better quality, slower
+          resolution={1024} // Off-buffer resolution, lower=faster, higher=better quality, slower
           mirror={0.5} // Mirror environment, 0 = texture colors, 1 = pick up env colors
           depthScale={0} // Scale the depth factor (0 = no depth, default = 0)
           minDepthThreshold={0.9} // Lower edge for the depthTexture interpolation (default = 0)
@@ -106,14 +105,13 @@ export const Window: React.FC<WindowProps> = ({
       <mesh rotation={[0,Math.PI,0]}>
         <planeGeometry args={[width, height]} />
         <MeshReflectorMaterial
-          color={"#ffffff"}
-          opacity={0.8} // Adjust opacity as needed
+          opacity={0.7} // Adjust opacity as needed
           transparent={true}
           blur={[0, 0]} // Blur ground reflections (width, height), 0 skips blur
           mixBlur={0} // How much blur mixes with surface roughness (default = 1)
           mixStrength={1} // Strength of the reflections
           mixContrast={1} // Contrast of the reflections
-          resolution={256} // Off-buffer resolution, lower=faster, higher=better quality, slower
+          resolution={1024} // Off-buffer resolution, lower=faster, higher=better quality, slower
           mirror={0.5} // Mirror environment, 0 = texture colors, 1 = pick up env colors
           depthScale={0} // Scale the depth factor (0 = no depth, default = 0)
           minDepthThreshold={0.9} // Lower edge for the depthTexture interpolation (default = 0)
