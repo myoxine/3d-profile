@@ -7,7 +7,8 @@ import {Ceiling} from './Ceiling';
 import { Model as Door } from "./Door"
 import { LightSwitch } from './LightSwitch'
 import { Model as Sofa } from './Sofa'
-import { StandingLamp } from './StandingLamp'
+import { NeonSign } from './NeonSign'
+import { WallLamp } from './WallLamp'
 import { Model as AirConditioner } from './AirConditioner'
 import { Model as Credenza } from './Credenza'
 import { Model as Plant } from './Plant'
@@ -16,6 +17,11 @@ import { Model as Laptop } from './Laptop'
 import { Tv } from './Tv'
 import { Model as Monitor } from './Monitor'
 import { PhotoFrame } from './PhotoFrame'
+import { Model as Character } from './Character'
+import { Model as Mouse } from './Mouse'
+import { Model as Kid } from './Kid'
+import { Model as Woman } from './Woman'
+import { Model as Clock } from './Clock'
 export const Room = () => {
     const deskScale = 1.5 / 2;
     const doorScale = 2.5 / 2.138395843336184
@@ -39,12 +45,16 @@ export const Room = () => {
             <AnimatedSpinningChair position={[0.55, -2 + 0.7, -0.2]} rotation={[0, -Math.PI, 0]} />
             {/* 3 saklar single di samping kanan pintu (dinding depan z=1.55),
                 sudah menghadap ke dalam ruangan. Sesuaikan angka setelah dilihat. */}
-            <LightSwitch position={[0.2, -0.7, 1.49]} scale={1} />
+            <LightSwitch position={[0.18, -0.7, 1.49]} scale={1} />
             {/* Sofa di pojok depan-kiri, dekat saklar. Skala/rotasi perkiraan,
                 sesuaikan setelah dilihat (model ini berukuran besar). */}
-            <Sofa scale={0.4} rotation={[0, 0, 0]} position={[-0.6, -1.9, -1.0]} />
-            {/* Standing lamp di sudut, di samping sofa */}
-            <StandingLamp position={[-1.3, -1.9, -1.3]} />
+            <Sofa scale={[23, 30, 30]} rotation={[0, 0, 0]} position={[-0.75, -1.9, -1.1]} />
+            {/* Papan neon "Hadi Halim" di dinding belakang, di atas komputer.
+                Menghadap +Z (ke dalam ruangan). Dikontrol saklar standingOn. */}
+            <NeonSign position={[0.9, 0.1, -1.48]} />
+            {/* 2 lampu di belakang sofa (flanking), dikontrol saklar sofaOn */}
+            <WallLamp position={[-1.3, -0.5, -1.4]} scale={1} />
+            <WallLamp position={[-0.2, -0.5, -1.4]} scale={1} />
             {/* AC di dinding belakang, di atas sofa */}
             <AirConditioner position={[-0.5, 1.2, -1.4]} />
             {/* Credenza dipanjangkan sepanjang lebar dinding (stretch sumbu X) */}
@@ -53,12 +63,26 @@ export const Room = () => {
             <Plant position={[0.1, -1.9, 1.3]} scale={[0.7, 0.7, 0.7]} />
             {/* Table lamp di atas credenza (saklar tableOn) */}
             <TableLamp position={[-1.25, -1.09, 1.32]} />
+            {/* Karakter duduk mengetik di kursi kerja, menghadap meja (-Z).
+                Setel position.y (tinggi duduk), x/z, dan rotation setelah dilihat. */}
+            <Character position={[0.55, -1.86, -0.53]} rotation={[0, Math.PI, 0]} scale={1} />
+            {/* Kid duduk di sofa menonton TV (+Z). Avatar bertekstur, tinggi ~1.8m
+                pada scale 1. Setel position.y (tinggi duduk) setelah dilihat. */}
+            <Kid position={[-0.4, -1.9, -0.8]} rotation={[0, 0, 0]} scale={1} />
+            {/* Wanita duduk di sofa menonton TV (+Z). Sudah bertekstur.
+                Setel position.y (tinggi duduk) & scale setelah dilihat. */}
+            <Woman position={[-1.05, -1.9, -0.9]} rotation={[0, 0.10*Math.PI, 0]} scale={1} />
             {/* Laptop di atas meja kerja (meja top ~y=-1.19) */}
-            <Laptop scale={0.08} rotation={[0, 0, 0]} position={[0.45, -1.19, -1]} />
+            <Laptop scale={0.09} rotation={[0, 0, 0]} position={[0.45, -1.19, -1.05]} />
+            {/* Mouse di meja, di kanan laptop (panjang ~12cm) */}
+            <Mouse scale={0.07} rotation={[0, 0, 0]} position={[0.8, -1.19, -1.13]} />
             {/* Monitor di meja, di belakang laptop, menghadap kursi (+Z) */}
-            <Monitor scale={1} rotation={[0, -0.15 * Math.PI, 0]} position={[1, -1.19, -1]} />
+            <Monitor scale={1} rotation={[0, -0.15 * Math.PI, 0]} position={[1, -1.19, -1.2]} />
             {/* TV di atas credenza, menghadap ke dalam ruangan */}
-            <Tv scale={0.7} rotation={[0, 0.5 * Math.PI, 0]} position={[-0.7, -1.09, 1.35]} />
+            <Tv scale={0.8} rotation={[0, Math.PI, 0]} position={[-0.55, -1.09, 1.3]} />
+            {/* Jam dinding di atas TV (dinding depan z=1.55), menghadap -Z (ke dalam ruangan).
+                Jarum berputar mengikuti jam asli. Setel y (tinggi) & scale setelah dilihat. */}
+            <Clock scale={1} rotation={[0, Math.PI, 0]} position={[-0.55, 0.55, 1.5]} />
             {/* === Galeri dinding belakang (atas sofa): 2 baris x 4 kolom ===
                 Menghadap +Z (default). Kolom x: -1.15 / -0.72 / -0.29 / 0.14 */}
             {/* Baris bawah (kiri->kanan): UBM transkrip, UBM sertifikat, Binus S1, foto profil */}

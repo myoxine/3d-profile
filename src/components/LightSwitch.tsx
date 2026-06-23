@@ -105,25 +105,28 @@ function SingleSwitch({ on, onToggle, ...props }: SingleSwitchProps) {
   )
 }
 
-// Tiga single switch tersusun horizontal: ceiling, standing, table.
+// Empat single switch tersusun horizontal: ceiling, neon(standing), table, sofa-lamp.
 export function LightSwitch(props: JSX.IntrinsicElements['group']) {
   const {
     ceilingOn,
     standingOn,
     tableOn,
+    sofaOn,
     toggleCeiling,
     toggleStanding,
     toggleTable,
+    toggleSofa,
   } = useLighting()
 
   // jarak antar pusat saklar = ukuran plat (0.10) + sedikit celah, agar berdekatan
   const spacing = SWITCH_SIZE + 0.01
-
+  // 4 saklar dipusatkan: posisi -1.5,-0.5,0.5,1.5 x spacing
   return (
     <group {...props}>
-      <SingleSwitch on={ceilingOn} onToggle={toggleCeiling} position={[-spacing, 0, 0]} />
-      <SingleSwitch on={standingOn} onToggle={toggleStanding} position={[0, 0, 0]} />
-      <SingleSwitch on={tableOn} onToggle={toggleTable} position={[spacing, 0, 0]} />
+      <SingleSwitch on={ceilingOn} onToggle={toggleCeiling} position={[-1.5 * spacing, 0, 0]} />
+      <SingleSwitch on={standingOn} onToggle={toggleStanding} position={[-0.5 * spacing, 0, 0]} />
+      <SingleSwitch on={tableOn} onToggle={toggleTable} position={[0.5 * spacing, 0, 0]} />
+      <SingleSwitch on={sofaOn} onToggle={toggleSofa} position={[1.5 * spacing, 0, 0]} />
     </group>
   )
 }
