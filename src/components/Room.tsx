@@ -38,7 +38,7 @@ export const Room = () => {
             <LightSwitch position={[0.2, -0.7, 1.49]} scale={1} />
             {/* Sofa di pojok depan-kiri, dekat saklar. Skala/rotasi perkiraan,
                 sesuaikan setelah dilihat (model ini berukuran besar). */}
-            <Sofa scale={0.5} rotation={[0, 0, 0]} position={[-0.5, -1.9, -1.0]} />
+            <Sofa scale={0.4} rotation={[0, 0, 0]} position={[-0.6, -1.9, -1.0]} />
             {/* Standing lamp di sudut, di samping sofa */}
             <StandingLamp position={[-1.3, -1.9, -1.3]} />
             {/* AC di dinding belakang, di atas sofa */}
