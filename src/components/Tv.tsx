@@ -15,14 +15,14 @@ import { Model as TvModel } from './TVModel'
 const VIDEO_ID = 'pRpeEdMmmQ0'
 
 // Layar menghadap +X lokal (yang setelah rotasi di Room mengarah ke ruangan).
-const SCREEN_POS: [number, number, number] = [0., 0.38, -0.01]
+const SCREEN_POS: [number, number, number] = [0.0214, 0.395, 0]
 const SCREEN_ROT: [number, number, number] = [0, Math.PI / 2, 0]
 const SCREEN_W = 1.0 // lebar layar (unit lokal)
 const SCREEN_H = 0.6 // tinggi layar (unit lokal)
 
 // iframe dirender pada IFRAME_W x IFRAME_H px (aspek ~ SCREEN_W:SCREEN_H).
-const IFRAME_W = 680
-const IFRAME_H = 384
+const IFRAME_W = 1280*2.6/5
+const IFRAME_H = 720*2.6/5
 // Skala <Html transform> -> dunia. Setel angka ini agar video memenuhi layar:
 // terlalu KECIL -> naikkan (mis. 0.08); terlalu BESAR -> turunkan (mis. 0.04).
 const HTML_SCALE = 0.065
@@ -63,6 +63,7 @@ export function Tv(props: JSX.IntrinsicElements['group']) {
       {playing && (
         <Html
           transform
+          occlude="blending"
           position={[SCREEN_POS[0] + 0.01, SCREEN_POS[1], SCREEN_POS[2]]}
           rotation={SCREEN_ROT}
           scale={HTML_SCALE}
