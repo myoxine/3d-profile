@@ -12,6 +12,7 @@ export interface LightingState {
   ceilingOn: boolean
   standingOn: boolean
   tableOn: boolean
+  sofaOn: boolean
   // suasana ruangan (mengikuti dark mode sistem)
   timeOfDay: TimeOfDay
 
@@ -19,6 +20,7 @@ export interface LightingState {
   toggleCeiling: () => void
   toggleStanding: () => void
   toggleTable: () => void
+  toggleSofa: () => void
 }
 
 const DARK_MODE_QUERY = '(prefers-color-scheme: dark)'
@@ -36,6 +38,7 @@ export function LightingProvider({ children }: { children: ReactNode }) {
   const [ceilingOn, setCeiling] = useState(false)
   const [standingOn, setStanding] = useState(false)
   const [tableOn, setTable] = useState(false)
+  const [sofaOn, setSofa] = useState(false)
 
   // Siang/malam mengikuti dark mode sistem, dan ikut berubah secara live
   // kalau pengguna mengganti tema komputernya.
@@ -55,12 +58,14 @@ export function LightingProvider({ children }: { children: ReactNode }) {
       ceilingOn,
       standingOn,
       tableOn,
+      sofaOn,
       timeOfDay,
       toggleCeiling: () => setCeiling((v) => !v),
       toggleStanding: () => setStanding((v) => !v),
       toggleTable: () => setTable((v) => !v),
+      toggleSofa: () => setSofa((v) => !v),
     }),
-    [ceilingOn, standingOn, tableOn, timeOfDay]
+    [ceilingOn, standingOn, tableOn, sofaOn, timeOfDay]
   )
 
   return (
