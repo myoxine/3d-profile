@@ -7,6 +7,7 @@
 
 import { useTexture } from '@react-three/drei'
 import type { JSX } from 'react'
+import { useFocus } from '../store/useFocus'
 
 type PhotoFrameProps = JSX.IntrinsicElements['group'] & {
   image?: string
@@ -37,9 +38,28 @@ export function PhotoFrame({
 }: PhotoFrameProps) {
   const border = 0.04
   const depth = 0.03
+  const openPhoto = useFocus((s) => s.openPhoto)
+
+  // Klik bingkai (yang ada fotonya) -> kamera fokus ke galeri + foto diperbesar.
+  const interactive = !!image
+  const handlers = interactive
+    ? {
+        onClick: (e: { stopPropagation: () => void }) => {
+          e.stopPropagation()
+          openPhoto(image!)
+        },
+        onPointerOver: (e: { stopPropagation: () => void }) => {
+          e.stopPropagation()
+          document.body.style.cursor = 'pointer'
+        },
+        onPointerOut: () => {
+          document.body.style.cursor = 'auto'
+        },
+      }
+    : {}
 
   return (
-    <group {...props}>
+    <group {...props} {...handlers}>
       {/* Pigura */}
       <mesh castShadow receiveShadow>
         <boxGeometry args={[width + border * 2, height + border * 2, depth]} />
