@@ -6,7 +6,7 @@ import * as THREE from 'three'
 import type { JSX } from 'react'
 import { useGLTF } from '@react-three/drei'
 import type { GLTF } from 'three-stdlib'
-import { useLayoutEffect,useRef } from 'react'
+import { useLayoutEffect } from 'react'
 type GLTFResult = GLTF & {
   nodes: {
     Cube157: THREE.Mesh
