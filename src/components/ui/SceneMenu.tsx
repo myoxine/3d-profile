@@ -8,11 +8,11 @@ import { useFocus, type ViewName } from '../../store/useFocus'
 
 const NAV: { view: ViewName; label: string; icon: string }[] = [
   { view: 'overview', label: 'Beranda', icon: '🏠' },
-  { view: 'photos', label: 'Pencapaian', icon: '🏆' },
-  { view: 'desk', label: 'Portofolio', icon: '🚀' },
+  { view: 'photos', label: 'Education & Certificate', icon: '🎓' },
+  { view: 'desk', label: 'Experience & Portfolio', icon: '🚀' },
   { view: 'tv', label: 'My Video', icon: '🎬' },
-  { view: 'books', label: 'Tutorial', icon: '📚' },
-  { view: 'shelf', label: 'Terhubung', icon: '🤝' },
+  { view: 'books', label: 'Tutorial Series', icon: '📚' },
+  { view: 'shelf', label: 'Contact Me', icon: '🤝' },
 ]
 
 export function SceneMenu() {
