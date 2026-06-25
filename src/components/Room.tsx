@@ -22,9 +22,23 @@ import { Model as Mouse } from './Mouse'
 import { Model as Kid } from './Kid'
 import { Model as Woman } from './Woman'
 import { Model as Clock } from './Clock'
+import { SocialShelf } from './SocialShelf'
+import { BookShelf } from './BookShelf'
+import { Cactus } from './Cactus'
+import { useFocus } from '../store/useFocus'
 export const Room = () => {
     const deskScale = 1.5 / 2;
     const doorScale = 2.5 / 2.138395843336184
+    const setView = useFocus((s) => s.setView)
+    // handler klik untuk monitor & laptop -> fokus ke tampilan monitor
+    const deskClick = (e: { stopPropagation: () => void }) => {
+        e.stopPropagation()
+        setView('desk')
+    }
+    const pointer = {
+        onPointerOver: (e: { stopPropagation: () => void }) => { e.stopPropagation(); document.body.style.cursor = 'pointer' },
+        onPointerOut: () => { document.body.style.cursor = 'auto' },
+    }
     return (
         <>
             <Floor position={[0, -2 + 0.05, 0]} />
@@ -52,6 +66,18 @@ export const Room = () => {
             {/* Papan neon "Hadi Halim" di dinding belakang, di atas komputer.
                 Menghadap +Z (ke dalam ruangan). Dikontrol saklar standingOn. */}
             <NeonSign position={[0.9, 0.1, -1.48]} />
+            {/* Floating shelf di BAWAH tulisan "Hadi Halim" + ikon sosial (klik buka tautan).
+                z dimajukan dari dinding (-1.55) agar kubus yang berputar tidak menembus tembok. */}
+            <SocialShelf position={[0.9, -0.42, -1.44]} />
+            {/* Rak buku tile (grid 2x2) di dinding kiri (x=-1.55), menghadap +X.
+                Tiap sel = 1 series; klik buku -> artikel, klik sel -> panel. */}
+            <BookShelf position={[-1.53, -0.35, 0]} rotation={[0, Math.PI / 2, 0]} />
+            {/* 3 kaktus duduk di atas papan rak (top lokal ~0.367, tidak melayang). */}
+            <group position={[-1.53, -0.35, 0]} rotation={[0, Math.PI / 2, 0]}>
+                <Cactus index={1} position={[-0.42, 0.366, 0.08]} scale={0.42} />
+                <Cactus index={2} position={[0, 0.366, 0.08]} scale={0.46} />
+                <Cactus index={3} position={[0.42, 0.366, 0.08]} scale={0.42} />
+            </group>
             {/* 2 lampu di belakang sofa (flanking), dikontrol saklar sofaOn */}
             <WallLamp position={[-1.3, -0.5, -1.4]} scale={1} />
             <WallLamp position={[-0.2, -0.5, -1.4]} scale={1} />
@@ -72,17 +98,17 @@ export const Room = () => {
             {/* Wanita duduk di sofa menonton TV (+Z). Sudah bertekstur.
                 Setel position.y (tinggi duduk) & scale setelah dilihat. */}
             <Woman position={[-1.05, -1.9, -0.9]} rotation={[0, 0.10*Math.PI, 0]} scale={1} />
-            {/* Laptop di atas meja kerja (meja top ~y=-1.19) */}
-            <Laptop scale={0.09} rotation={[0, 0, 0]} position={[0.45, -1.19, -1.05]} />
+            {/* Laptop di atas meja kerja (meja top ~y=-1.19). Klik -> panel proyek */}
+            <Laptop scale={0.09} rotation={[0, 0, 0]} position={[0.45, -1.19, -1.05]} onClick={deskClick} {...pointer} />
             {/* Mouse di meja, di kanan laptop (panjang ~12cm) */}
             <Mouse scale={0.07} rotation={[0, 0, 0]} position={[0.8, -1.19, -1.13]} />
-            {/* Monitor di meja, di belakang laptop, menghadap kursi (+Z) */}
-            <Monitor scale={1} rotation={[0, -0.15 * Math.PI, 0]} position={[1, -1.19, -1.2]} />
+            {/* Monitor di meja, di belakang laptop, menghadap kursi (+Z). Klik -> panel proyek */}
+            <Monitor scale={1} rotation={[0, -0.15 * Math.PI, 0]} position={[1, -1.19, -1.2]} onClick={deskClick} {...pointer} />
             {/* TV di atas credenza, menghadap ke dalam ruangan */}
             <Tv scale={0.8} rotation={[0, Math.PI, 0]} position={[-0.55, -1.09, 1.3]} />
             {/* Jam dinding di atas TV (dinding depan z=1.55), menghadap -Z (ke dalam ruangan).
                 Jarum berputar mengikuti jam asli. Setel y (tinggi) & scale setelah dilihat. */}
-            <Clock scale={1} rotation={[0, Math.PI, 0]} position={[-0.55, 0.55, 1.5]} />
+            <Clock scale={1} rotation={[0, Math.PI, 0]} position={[-0.55, -0.12, 1.5]} />
             {/* === Galeri dinding belakang (atas sofa): 2 baris x 4 kolom ===
                 Menghadap +Z (default). Kolom x: -1.15 / -0.72 / -0.29 / 0.14 */}
             {/* Baris bawah (kiri->kanan): UBM transkrip, UBM sertifikat, Binus S1, foto profil */}

@@ -11,6 +11,7 @@ import * as THREE from 'three'
 import type { JSX } from 'react'
 import { Html } from '@react-three/drei'
 import { Model as TvModel } from './TVModel'
+import { useFocus } from '../store/useFocus'
 
 const VIDEO_ID = 'pRpeEdMmmQ0'
 
@@ -29,12 +30,14 @@ const HTML_SCALE = 0.065
 
 export function Tv(props: JSX.IntrinsicElements['group']) {
   const [playing, setPlaying] = useState(false)
+  const setView = useFocus((s) => s.setView)
 
   return (
     <group
       {...props}
       onClick={(e) => {
         e.stopPropagation()
+        setView('tv') // kamera fokus ke TV (area "About Me")
         setPlaying((p) => !p)
       }}
       onPointerOver={(e) => {
