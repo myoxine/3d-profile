@@ -6,8 +6,8 @@ After Part 10 the portfolio is light enough to open on a phone — but "loads on
 
 ✅ A tiny **`useMediaQuery` hook** — reactive breakpoints with no library
 ✅ A **quality tier**: drop the pixel ratio and switch off Bloom on phones, automatically
-✅ **Adaptive camera FOV** — widen the lens in portrait so nothing gets cropped
 ✅ A **responsive menu** — icon-only and horizontally scrollable when space is tight
+✅ A cautionary tale: **why we tried adaptive FOV and then ripped it out**
 ✅ The reasoning behind *what* to scale back on mobile, and what to leave alone
 
 The same scene, now comfortable from a 13" laptop down to a phone in portrait.
@@ -83,29 +83,36 @@ const lowPower = useIsLowPower()
 
 ---
 
-## Step 2 — Adaptive FOV: Stop Cropping in Portrait
+## Step 2 — The Adaptive-FOV Trap (a thing we *removed*)
 
-The focus views from Part 8 were framed on a wide (landscape) screen. Put that exact camera on a **portrait** phone and the top and bottom of the room get sliced off — a perspective camera's vertical FOV is fixed, so a taller, narrower viewport sees *less*, not more.
+Here's a "clever" idea that seemed obviously right and turned out to be wrong — worth showing in full, because you'll be tempted by it too.
 
-The fix is to **widen the field of view as the screen gets taller**. Inside `CameraRig`, read the canvas size and set the camera's `fov` from the aspect ratio:
+A portrait phone has a tall, narrow viewport. A perspective camera's vertical FOV is fixed, so a taller viewport sees *less* horizontally and crops the room. The "fix" looks trivial: **widen the FOV as the screen gets taller.**
 
 ```tsx
-// src/components/camera/CameraRig.tsx
-const camera = useThree((s) => s.camera)
-const size = useThree((s) => s.size)
-
+// ❌ DON'T DO THIS — it backfired on us
 useEffect(() => {
   const cam = camera as THREE.PerspectiveCamera
-  if (!cam.isPerspectiveCamera) return
   const aspect = size.width / size.height
-  cam.fov = aspect < 1 ? 82 : aspect < 1.4 ? 70 : 60  // portrait → wide
+  cam.fov = aspect < 1 ? 82 : aspect < 1.4 ? 70 : 60   // portrait → wide
   cam.updateProjectionMatrix()
 }, [camera, size])
 ```
 
-Three tiers: a roomy **60°** on landscape desktop, **70°** for squarish/tablet, and a wide **82°** in portrait so the whole scene stays in frame. Because it reads `size` (which R3F updates on every resize/rotate), it re-runs the moment orientation changes — no manual listener.
+It shipped, and the scene looked *broken*: the monitor ballooned into a giant grey slab, the bookshelf loomed like skyscrapers, everything near the camera bulged. Two reasons, both fundamental:
 
-> 📐 **Wider FOV ≠ broken framing.** Our presets aim at a *target point*; widening the lens around that same target just reveals more around it. The composition stays centered; it only gets more breathing room. (Always `updateProjectionMatrix()` after touching `fov`, or the change never reaches the GPU.)
+1. **Wide FOV in a small room = fisheye.** Our room is barely a couple of metres across and the camera sits *inside* it. At 70–82°, objects near the lens distort violently — that's wide-angle perspective doing exactly what it does, just in a space too tight to hide it.
+2. **FOV is global — it wrecked the calibration.** All of Part 9's painstaking monitor-screen alignment (the `<Html transform>` desktop, the mock image, the CSS3D factor) was tuned at **FOV 60**. Change the lens and every hand-calibrated focus view shifts off its mark.
+
+So we **deleted it** and pinned the FOV at a fixed 60:
+
+```tsx
+// FOV is intentionally LEFT FIXED (60, set on <Canvas>). Adaptive FOV
+// fisheye'd this tiny room AND broke the Part-9 monitor calibration.
+// Responsiveness is handled in the UI layer, not by changing the lens.
+```
+
+> 🧠 **The real lesson:** responsiveness belongs in the **UI layer** (DOM that reflows), not in the **camera** (a calibrated instrument). When a view has been hand-framed, treat its lens as a fixed constant — adapt the *interface* around it, not the optics. Minor portrait cropping is a fair price for framing that never lies.
 
 ---
 
@@ -157,7 +164,7 @@ Good news: almost nothing to do. drei's **`CameraControls` is touch-native** —
 
 - **Make "what screen is this?" reactive.** A 15-line `useMediaQuery` over `window.matchMedia` beats a resize listener — it only fires on breakpoint crossings, and any component can read it.
 - **On mobile, cut fill-rate first.** `dpr` and postprocessing dominate the frame cost; capping DPR to 1 and dropping Bloom recovers the most fps for the least visible change. Geometry detail is not the problem.
-- **A perspective camera sees *less* in portrait.** Widen `fov` as aspect drops so framing doesn't crop — and always `updateProjectionMatrix()`.
+- **Don't make a calibrated camera responsive.** Adaptive FOV fisheyes a small room and shifts every hand-framed view off its calibration. Pin the lens; reflow the *UI* instead. Accept a little portrait cropping.
 - **When labels won't fit, go icon-only — but keep `title`/`aria-label`.** Use `flex: none` + `overflow-x: auto` so buttons scroll instead of shrinking into slivers.
 - **Size overlays in `vw`/`vh` with `min()`** and they're responsive without breakpoints.
 - **Model constraints on the camera, not the input.** Because locks and the boundary live on `CameraControls`, touch behaves correctly with zero extra code.
