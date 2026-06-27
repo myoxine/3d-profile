@@ -10,6 +10,7 @@
 
 import { useEffect, useRef } from 'react'
 import * as THREE from 'three'
+import { useThree } from '@react-three/fiber'
 import { CameraControls } from '@react-three/drei'
 import { useFocus, type ViewName } from '../../store/useFocus'
 
@@ -48,6 +49,8 @@ export function CameraRig() {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const ref = useRef<any>(null)
   const view = useFocus((s) => s.view)
+  const camera = useThree((s) => s.camera)
+  const size = useThree((s) => s.size)
 
   // sekali: kurung kamera di dalam ruangan
   useEffect(() => {
@@ -56,6 +59,17 @@ export function CameraRig() {
     c.setBoundary(ROOM_BOUNDARY)
     c.boundaryEnclosesCamera = true
   }, [])
+
+  // FOV adaptif terhadap rasio layar: di portrait/HP yang sempit, perlebar FOV
+  // supaya isi ruangan tidak terpotong (kalau tidak, framing landscape akan
+  // memotong bagian atas/bawah pada layar tinggi).
+  useEffect(() => {
+    const cam = camera as THREE.PerspectiveCamera
+    if (!cam.isPerspectiveCamera) return
+    const aspect = size.width / size.height
+    cam.fov = aspect < 1 ? 82 : aspect < 1.4 ? 70 : 60
+    cam.updateProjectionMatrix()
+  }, [camera, size])
 
   useEffect(() => {
     const c = ref.current
