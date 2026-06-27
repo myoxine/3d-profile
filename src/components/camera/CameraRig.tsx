@@ -48,6 +48,9 @@ export function CameraRig() {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const ref = useRef<any>(null)
   const view = useFocus((s) => s.view)
+  // homeKey dinaikkan tiap klik "Beranda"/reset -> paksa kamera kembali ke
+  // framing overview yang rapi (berguna jika user sudah memutar kamera).
+  const homeKey = useFocus((s) => s.homeKey)
 
   // sekali: kurung kamera di dalam ruangan
   useEffect(() => {
@@ -69,18 +72,11 @@ export function CameraRig() {
     const v = VIEWS[view]
 
     if (view === 'overview') {
-      // overview: boleh diputar + sedikit zoom (dibatasi maxDistance)
+      // overview: boleh diputar bebas + sedikit zoom (dibatasi maxDistance &
+      // boundary supaya tetap di dalam ruangan). Klik "Beranda" me-reset
+      // framing via homeKey kalau kamera sempat diputar ke sudut aneh.
       c.minDistance = OVERVIEW_MIN
       c.maxDistance = OVERVIEW_MAX
-      // Batasi sudut rotasi: tanpa ini, memutar overview membuat
-      // boundaryEnclosesCamera menggeser kamera mepet ke dinding samping
-      // (rak buku di x=-1.53) sehingga objek dekat tampak raksasa. Batas
-      // ketat (±~15° horizontal, sedikit vertikal) menjaga overview tetap
-      // pada komposisi ruangan yang bagus & tak pernah menyapu ke rak/dinding.
-      c.minAzimuthAngle = -Math.PI * 0.085
-      c.maxAzimuthAngle = Math.PI * 0.085
-      c.minPolarAngle = Math.PI * 0.44
-      c.maxPolarAngle = Math.PI * 0.53
       c.enabled = true
     } else {
       // fokus area: kunci total (tidak bisa rotate / zoom / pan).
@@ -88,16 +84,11 @@ export function CameraRig() {
       const d = distance(v)
       c.minDistance = d
       c.maxDistance = d
-      // lepas batas sudut (view fokus tetap dikunci via enabled=false)
-      c.minAzimuthAngle = -Infinity
-      c.maxAzimuthAngle = Infinity
-      c.minPolarAngle = 0
-      c.maxPolarAngle = Math.PI
       c.enabled = false
     }
 
     c.setLookAt(v.pos[0], v.pos[1], v.pos[2], v.target[0], v.target[1], v.target[2], true)
-  }, [view])
+  }, [view, homeKey])
 
   return <CameraControls ref={ref} makeDefault minDistance={OVERVIEW_MIN} maxDistance={OVERVIEW_MAX} />
 }

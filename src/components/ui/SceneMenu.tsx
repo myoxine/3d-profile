@@ -131,7 +131,11 @@ export function SceneMenu() {
 
   const onNav = (v: ViewName) => {
     if (touring) stopTour()
-    setView(v)
+    // klik "Beranda" -> reset() agar kamera selalu kembali ke framing overview
+    // yang rapi (homeKey naik), bahkan saat view sudah 'overview' tapi terlanjur
+    // diputar. View lain cukup setView biasa.
+    if (v === 'overview') reset()
+    else setView(v)
   }
 
   return (

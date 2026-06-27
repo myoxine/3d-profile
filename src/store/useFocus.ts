@@ -14,6 +14,7 @@ type FocusState = {
   panel: PanelName // drawer samping yang aktif
   series: number | null // index series tutorial yang sedang dibuka
   touring: boolean // sedang menjalankan tour otomatis
+  homeKey: number // dinaikkan untuk MEMAKSA kamera re-center ke overview
 
   setView: (v: ViewName) => void
   openPhoto: (img: string) => void
@@ -31,6 +32,7 @@ export const useFocus = create<FocusState>((set) => ({
   panel: null,
   series: null,
   touring: false,
+  homeKey: 0,
 
   setView: (view) => set({ view }),
   openPhoto: (photo) => set({ photo, view: 'photos' }),
@@ -39,5 +41,8 @@ export const useFocus = create<FocusState>((set) => ({
   closePanel: () => set({ panel: null, series: null }),
   startTour: () => set({ touring: true, panel: null, series: null, photo: null }),
   stopTour: () => set({ touring: false }),
-  reset: () => set({ view: 'overview', photo: null, panel: null, series: null, touring: false }),
+  // selalu naikkan homeKey supaya kamera kembali ke framing overview yang rapi,
+  // bahkan jika view sudah 'overview' (mis. setelah diputar lalu klik Beranda).
+  reset: () =>
+    set((s) => ({ view: 'overview', photo: null, panel: null, series: null, touring: false, homeKey: s.homeKey + 1 })),
 }))
