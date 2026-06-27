@@ -14,7 +14,9 @@ export default function App() {
   useHashRoute();
   return (
     <div style={{ width: "100vw", height: "100vh", position: 'relative' }}>
-      <Canvas camera={{ position: [0, 2, 1], fov: 60 }} shadows>
+      {/* dpr di-cap 1.5: di layar retina (DPR 2-3) render tetap tajam tapi
+          tidak membakar GPU dengan piksel 3x. */}
+      <Canvas camera={{ position: [0, 2, 1], fov: 60 }} shadows dpr={[1, 1.5]}>
         <LightingProvider>
           <Suspense fallback={<Loader />}>
             <SceneEnvironment />

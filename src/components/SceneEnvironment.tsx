@@ -12,7 +12,7 @@ export function SceneEnvironment() {
   return (
     <>
       <Environment
-        files="/hdri/dikhololo_sunset_4k.hdr"
+        files="/hdri/dikhololo_sunset_1k.hdr"
         background
         // siang: terang; malam: hampir gelap supaya lampu yang dominan
         environmentIntensity={isDay ? 0.3 : 0.02}
@@ -24,8 +24,10 @@ export function SceneEnvironment() {
         intensity={isDay ? 0.5 : 0.03}
         position={[3, 1, -2]}
         castShadow
-        shadow-mapSize-width={2048}
-        shadow-mapSize-height={2048}
+        // 1024 cukup untuk ruangan sekecil ini; 2048 memboroskan memori &
+        // bandwidth shadow tanpa beda visual yang terlihat.
+        shadow-mapSize-width={1024}
+        shadow-mapSize-height={1024}
         shadow-camera-far={50}
         shadow-camera-left={-5}
         shadow-camera-right={5}

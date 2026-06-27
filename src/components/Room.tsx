@@ -124,7 +124,7 @@ export const Room = () => {
             <PhotoFrame image="/images/ijazah-s2-transkrip.jpg" width={0.2} height={0.28} position={[-1.15, 0.12, -1.5]} />
             <PhotoFrame image="/images/ijazah-s2.jpg" width={0.3} height={0.213} position={[-0.72, 0.12, -1.5]} />
             <PhotoFrame image="/images/ijazah-s1.jpg" width={0.3} height={0.207} position={[-0.29, 0.12, -1.5]} />
-            <PhotoFrame image="/images/profile.png" background="#ffffff" width={0.3} height={0.39} position={[0.14, 0.12, -1.5]} />
+            <PhotoFrame image="/images/profile.jpg" background="#ffffff" width={0.3} height={0.39} position={[0.14, 0.12, -1.5]} />
             {/* Baris atas: 4 sertifikat TestDome */}
             <PhotoFrame image="/images/cert-javascript.jpg" width={0.26} height={0.235} position={[-1.15, 0.56, -1.5]} />
             <PhotoFrame image="/images/cert-react.jpg" width={0.26} height={0.235} position={[-0.72, 0.56, -1.5]} />
