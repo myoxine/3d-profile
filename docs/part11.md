@@ -1,4 +1,4 @@
-# 3D Profile Website - Part 11: Make It Mobile — Responsive UI, Adaptive Framing & a Quality Tier
+# 3D Profile Website - Part 11: Make It Mobile — Responsive UI, a Quality Tier & Sane Camera Bounds
 
 Welcome back to the **3D Profile Website** series!
 
@@ -158,7 +158,7 @@ The overlays we built earlier were already responsive — the tour card is `widt
 
 Good news: almost nothing to do. drei's **`CameraControls` is touch-native** — one finger orbits, two fingers dolly/truck. And the camera locks we added in Part 8 (`minDistance === maxDistance`, `enabled = false` on a focused view) work identically under touch, so a pinch can't wreck a hand-tuned framing. The room **boundary box** keeps a swiping finger from flinging the camera through a wall, exactly as it does with a mouse. Mobile interaction came mostly for free because the constraints were modeled on the camera, not the input device.
 
-> 🧱 **One bound we had to add.** Free orbit in the overview had a nasty edge: `boundaryEnclosesCamera` *slides* the camera along the wall as you swing it, so you could orbit until the lens was a few centimetres from the bookshelf and a single book filled the screen — it looked like the scene had exploded. The fix is to bound the *angles*, not just the position: `minAzimuthAngle`/`maxAzimuthAngle` (±29°) and `minPolarAngle`/`maxPolarAngle` keep the overview a gentle look-around that always faces the room and can never jam into a side wall. A boundary box stops the camera leaving the room; angle limits stop it pressing its nose against the furniture.
+> 🧱 **One bound we had to add.** Free orbit in the overview had a nasty edge: `boundaryEnclosesCamera` *slides* the camera along the wall as you swing it, so you could orbit until the lens was a few centimetres from the bookshelf and a single book filled the screen — it looked like the scene had exploded. The fix is to bound the *angles*, not just the position: `minAzimuthAngle`/`maxAzimuthAngle` (±15°) and `minPolarAngle`/`maxPolarAngle` keep the overview a gentle look-around that always faces the room and can never jam into a side wall. A boundary box stops the camera leaving the room; angle limits stop it pressing its nose against the furniture.
 
 ---
 

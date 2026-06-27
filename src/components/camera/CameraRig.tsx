@@ -74,14 +74,13 @@ export function CameraRig() {
       c.maxDistance = OVERVIEW_MAX
       // Batasi sudut rotasi: tanpa ini, memutar overview membuat
       // boundaryEnclosesCamera menggeser kamera mepet ke dinding samping
-      // (rak buku di x=-1.53) sehingga objek dekat tampak raksasa. Dengan
-      // batas ini kamera tetap menghadap area belakang/meja dan hanya
-      // "lihat-lihat" ±29° horizontal & sedikit vertikal — tak pernah
-      // menempel ke rak/dinding.
-      c.minAzimuthAngle = -Math.PI * 0.16
-      c.maxAzimuthAngle = Math.PI * 0.16
-      c.minPolarAngle = Math.PI * 0.40
-      c.maxPolarAngle = Math.PI * 0.56
+      // (rak buku di x=-1.53) sehingga objek dekat tampak raksasa. Batas
+      // ketat (±~15° horizontal, sedikit vertikal) menjaga overview tetap
+      // pada komposisi ruangan yang bagus & tak pernah menyapu ke rak/dinding.
+      c.minAzimuthAngle = -Math.PI * 0.085
+      c.maxAzimuthAngle = Math.PI * 0.085
+      c.minPolarAngle = Math.PI * 0.44
+      c.maxPolarAngle = Math.PI * 0.53
       c.enabled = true
     } else {
       // fokus area: kunci total (tidak bisa rotate / zoom / pan).
