@@ -2,11 +2,11 @@
 // Satu tempat untuk semua tautan & data konten. EDIT NILAI DI SINI.
 
 export const LINKS = {
-  github: 'https://github.com/your-username',
-  medium: 'https://medium.com/@your-username',
-  linkedin: 'https://www.linkedin.com/in/your-username/',
-  email: 'mailto:you@example.com',
-  whatsapp: 'https://wa.me/0000000000', // ganti dengan nomor kamu (format internasional tanpa +)
+  github: 'https://github.com/myoxine',
+  medium: 'https://medium.com/@hadish19',
+  linkedin: 'https://www.linkedin.com/in/hadish19/',
+  email: 'mailto:hdi_hlim@yahoo.com',
+  whatsapp: 'https://wa.me/628999353111',
 }
 
 // Aplikasi/proyek yang ditampilkan di "layar" monitor saat diklik.

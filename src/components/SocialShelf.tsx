@@ -4,11 +4,13 @@
 // membuka tautan.
 
 import * as THREE from 'three'
-import { useMemo, useRef } from 'react'
+import { useMemo, useRef, useState } from 'react'
 import type { JSX } from 'react'
 import { useFrame } from '@react-three/fiber'
+import { Html } from '@react-three/drei'
 import { SVGLoader } from 'three-stdlib'
 import { LINKS, openLink } from '../config/links'
+import { useFocus } from '../store/useFocus'
 
 // Path single-path brand (viewBox 24x24).
 const PATHS: Record<string, string> = {
@@ -48,6 +50,7 @@ function useLogoGeometry(path: string, target = 0.09, depth = 0.012) {
 
 type CubeProps = {
   name: string
+  label: string
   url: string
   bg: string
   size: number
@@ -55,10 +58,13 @@ type CubeProps = {
   position: [number, number, number]
 }
 
-function LogoCube({ name, url, bg, size, spin, position }: CubeProps) {
+function LogoCube({ name, label, url, bg, size, spin, position }: CubeProps) {
   const ref = useRef<THREE.Group>(null)
   const logo = useLogoGeometry(PATHS[name], size * 0.62)
   const h = size / 2
+  const [hovered, setHovered] = useState(false)
+  // hover/tooltip hanya aktif saat kamera fokus ke area sosial ("Contact Me")
+  const active = useFocus((s) => s.view === 'shelf')
 
   // sisi yang diberi logo (TANPA sisi atas +Y). +Z lokal logo mengarah keluar.
   const faces: { pos: [number, number, number]; rot: [number, number, number] }[] = [
@@ -82,13 +88,37 @@ function LogoCube({ name, url, bg, size, spin, position }: CubeProps) {
         openLink(url)
       }}
       onPointerOver={(e) => {
+        if (!active) return
         e.stopPropagation()
         document.body.style.cursor = 'pointer'
+        setHovered(true)
       }}
       onPointerOut={() => {
         document.body.style.cursor = 'auto'
+        setHovered(false)
       }}
     >
+      {/* tooltip saat hover (di atas kubus, di sumbu Y jadi tidak ikut berputar) */}
+      {hovered && active && (
+        <Html position={[0, size * 1.15, 0]} center distanceFactor={1.4} style={{ pointerEvents: 'none' }} zIndexRange={[20, 0]}>
+          <div
+            style={{
+              padding: '5px 10px',
+              borderRadius: 8,
+              background: 'rgba(18,18,22,0.92)',
+              color: '#fff',
+              fontSize: 12,
+              fontWeight: 600,
+              fontFamily: 'system-ui, sans-serif',
+              whiteSpace: 'nowrap',
+              boxShadow: '0 4px 14px rgba(0,0,0,0.45)',
+              border: `1px solid ${bg}`,
+            }}
+          >
+            {label}
+          </div>
+        </Html>
+      )}
       {/* badan kubus — menyala lembut (tidak terlalu terang) */}
       <mesh castShadow>
         <boxGeometry args={[size, size, size]} />
@@ -131,11 +161,11 @@ function Bracket({ x }: { x: number }) {
 }
 
 const ITEMS = [
-  { key: 'github', url: LINKS.github, bg: '#24292e' },
-  { key: 'email', url: LINKS.email, bg: '#ea4335' },
-  { key: 'linkedin', url: LINKS.linkedin, bg: '#0a66c2' },
-  { key: 'whatsapp', url: LINKS.whatsapp, bg: '#25d366' },
-  { key: 'medium', url: LINKS.medium, bg: '#111111' },
+  { key: 'github', label: 'GitHub', url: LINKS.github, bg: '#24292e' },
+  { key: 'email', label: 'Email', url: LINKS.email, bg: '#ea4335' },
+  { key: 'linkedin', label: 'LinkedIn', url: LINKS.linkedin, bg: '#0a66c2' },
+  { key: 'whatsapp', label: 'WhatsApp', url: LINKS.whatsapp, bg: '#25d366' },
+  { key: 'medium', label: 'Medium', url: LINKS.medium, bg: '#111111' },
 ]
 
 export function SocialShelf(props: JSX.IntrinsicElements['group']) {
@@ -163,6 +193,7 @@ export function SocialShelf(props: JSX.IntrinsicElements['group']) {
         <LogoCube
           key={it.key}
           name={it.key}
+          label={it.label}
           url={it.url}
           bg={it.bg}
           size={cube}

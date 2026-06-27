@@ -6,9 +6,12 @@ import { SceneEnvironment } from './components/SceneEnvironment';
 import { LightingProvider } from './components/lighting/LightingContext';
 import { CameraRig } from './components/camera/CameraRig';
 import { SceneMenu } from './components/ui/SceneMenu';
+import { useHashRoute } from './hooks/useHashRoute';
 import { EffectComposer, Bloom } from '@react-three/postprocessing';
 
 export default function App() {
+  // deep link: URL hash <-> view kamera (#home, #experience, ...)
+  useHashRoute();
   return (
     <div style={{ width: "100vw", height: "100vh", position: 'relative' }}>
       <Canvas camera={{ position: [0, 2, 1], fov: 60 }} shadows>

@@ -5,10 +5,11 @@
 // klik bingkai sel -> panel daftar artikel.
 
 import * as THREE from 'three'
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
 import type { JSX } from 'react'
-import { useGLTF, Text, RoundedBox } from '@react-three/drei'
+import { useGLTF, Text, RoundedBox, Html } from '@react-three/drei'
 import type { GLTF } from 'three-stdlib'
+import { useFocus } from '../store/useFocus'
 import { TUTORIALS, type Article } from '../config/tutorials'
 import { openLink } from '../config/links'
 
@@ -87,6 +88,9 @@ function CellBooks({ articles, color }: { articles: Article[]; color: string }) 
   const bookZ = DEPTH / 2 + BOOK_CTR // buku terpusat di kedalaman sel
   const zSpine = DEPTH / 2 + BOOK_DEPTH / 2 + 0.001 // teks menempel di permukaan spine
   const base = useMemo(() => new THREE.Color(color), [color])
+  const [hover, setHover] = useState<number | null>(null)
+  // hover/tooltip hanya aktif saat fokus ke rak ("Tutorial Series")
+  const active = useFocus((s) => s.view === 'books')
 
   return (
     <group>
@@ -98,11 +102,14 @@ function CellBooks({ articles, color }: { articles: Article[]; color: string }) 
           openLink(a.url)
         }
         const over = (e: { stopPropagation: () => void }) => {
+          if (!active) return
           e.stopPropagation()
           document.body.style.cursor = 'pointer'
+          setHover(i)
         }
         const out = () => {
           document.body.style.cursor = 'auto'
+          setHover(null)
         }
         return (
           <group key={i} onClick={open} onPointerOver={over} onPointerOut={out}>
@@ -123,6 +130,34 @@ function CellBooks({ articles, color }: { articles: Article[]; color: string }) 
             >
               {a.title}
             </Text>
+            {active && hover === i && (
+              <Html
+                position={[x, bottomY + halfH * 1.92, zSpine]}
+                center
+                style={{ pointerEvents: 'none' }}
+                zIndexRange={[18, 0]}
+              >
+                <div
+                  style={{
+                    width: 180,
+                    boxSizing: 'border-box',
+                    padding: '9px 12px',
+                    borderRadius: 10,
+                    background: 'rgba(20,20,26,0.96)',
+                    color: '#fff',
+                    fontFamily: 'system-ui, sans-serif',
+                    boxShadow: '0 8px 22px rgba(0,0,0,0.55)',
+                    border: `1px solid ${color}`,
+                    textAlign: 'left',
+                  }}
+                >
+                  <div style={{ fontSize: 12.5, fontWeight: 700, lineHeight: 1.35 }}>{a.title}</div>
+                  <div style={{ marginTop: 6, fontSize: 10.5, fontWeight: 600, color, letterSpacing: 0.2 }}>
+                    Baca di Medium →
+                  </div>
+                </div>
+              </Html>
+            )}
           </group>
         )
       })}
@@ -131,6 +166,7 @@ function CellBooks({ articles, color }: { articles: Article[]; color: string }) 
 }
 
 export function BookShelf(props: JSX.IntrinsicElements['group']) {
+  const openSeries = useFocus((s) => s.openSeries)
   const frameMat = <meshStandardMaterial color="#6b4a2f" roughness={0.7} metalness={0} />
 
   return (
@@ -170,7 +206,21 @@ export function BookShelf(props: JSX.IntrinsicElements['group']) {
         const s = TUTORIALS[series]
         const backColor = new THREE.Color(s.color).multiplyScalar(0.28)
         return (
-          <group key={series} position={[cx, cy, 0]}>
+          <group
+            key={series}
+            position={[cx, cy, 0]}
+            onClick={(e) => {
+              e.stopPropagation()
+              openSeries(series)
+            }}
+            onPointerOver={(e) => {
+              e.stopPropagation()
+              document.body.style.cursor = 'pointer'
+            }}
+            onPointerOut={() => {
+              document.body.style.cursor = 'auto'
+            }}
+          >
             <mesh position={[0, 0, 0.01]} receiveShadow>
               <boxGeometry args={[CELL_W, CELL_H, 0.012]} />
               <meshStandardMaterial color={backColor} roughness={0.85} />

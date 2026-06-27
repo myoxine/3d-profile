@@ -8,7 +8,7 @@ export type Series = { name: string; color: string; articles: Article[] }
 export const TUTORIALS: Series[] = [
   {
     name: 'Expo Router',
-    color: '#3a7bd5',
+    color: '#5b7290',
     articles: [
       { title: 'Navigasi Asik di Expo Router: Dari Dasar Sampai Pro', url: 'https://medium.com/@hadish19/navigasi-asik-di-expo-router-dari-dasar-sampai-pro-9b5cc4bf925c' },
       { title: 'Bagian 1 — Install Expo dan Membuat Screen', url: 'https://medium.com/@hadish19/expo-router-bagian-1-install-expo-dan-membuat-screen-0946cf219a9d' },
@@ -19,7 +19,7 @@ export const TUTORIALS: Series[] = [
   },
   {
     name: 'Fastify REST API',
-    color: '#22a06b',
+    color: '#5e8270',
     articles: [
       { title: 'Restful API menggunakan Fastify', url: 'https://medium.com/@hadish19/restful-api-menggunakan-fastify-e23277dc2391' },
       { title: 'Bagian 1 — Project Initial Setup (TS + Node.js)', url: 'https://medium.com/@hadish19/fastify-restful-api-bagian-1-project-initial-setup-typescript-node-js-0854f478216c' },
@@ -40,7 +40,7 @@ export const TUTORIALS: Series[] = [
   },
   {
     name: 'ExpressJS + TypeScript',
-    color: '#e0a526',
+    color: '#ab8654',
     articles: [
       { title: 'Dev Server API Backend (Express + TS + TypeORM)', url: 'https://medium.com/@hadish19/development-server-api-backend-with-expressjs-typescript-typeorm-29d297c93a32' },
       { title: 'Part 1 — Install TypeScript + Node.js', url: 'https://medium.com/@hadish19/part-1-install-typescript-node-js-fa8eb850a9d5' },
@@ -53,7 +53,7 @@ export const TUTORIALS: Series[] = [
   {
     // Series yang sedang berjalan — ganti URL saat artikel terbit.
     name: '3D Profile Website',
-    color: '#b5179e',
+    color: '#8d6585',
     articles: [
       { title: 'Series Intro — Membangun 3D Profile dengan React Three Fiber', url: 'https://medium.com/@hadish19' },
       { title: 'Part 1 — Setup R3F & Scene Dasar', url: 'https://medium.com/@hadish19' },
