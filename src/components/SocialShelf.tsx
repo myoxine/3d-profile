@@ -172,6 +172,10 @@ export function SocialShelf(props: JSX.IntrinsicElements['group']) {
   const gap = 0.26
   const cube = 0.13
   const cubeY = 0.02 + cube / 2 // di atas papan shelf
+  // Maju dari dinding: saat berputar, sudut diagonal kubus (±size*0.71) hampir
+  // menyentuh dinding belakang (z=-1.55) kalau kubus terpusat di papan (z=0).
+  // Geser +Z supaya sudutnya tetap bebas dari tembok.
+  const cubeZ = 0.045
   const n = ITEMS.length
   const boardW = n * gap + 0.1
   // bracket di-inset dari ujung agar KEDUANYA terlihat (tidak tertanam dinding samping)
@@ -179,9 +183,10 @@ export function SocialShelf(props: JSX.IntrinsicElements['group']) {
 
   return (
     <group {...props}>
-      {/* Papan shelf (kayu tipis), menempel ke dinding belakang */}
-      <mesh castShadow receiveShadow>
-        <boxGeometry args={[boardW, 0.04, 0.2]} />
+      {/* Papan shelf (kayu tipis). Diperdalam ke DEPAN (offset +z) supaya kubus
+          yang digeser maju tetap berpijak penuh; sisi belakang tetap di dinding. */}
+      <mesh castShadow receiveShadow position={[0, 0, 0.02]}>
+        <boxGeometry args={[boardW, 0.04, 0.24]} />
         <meshStandardMaterial color="#6b4a2f" roughness={0.7} />
       </mesh>
       {/* 2 bracket artistik */}
@@ -198,7 +203,7 @@ export function SocialShelf(props: JSX.IntrinsicElements['group']) {
           bg={it.bg}
           size={cube}
           spin={0.4 + i * 0.1}
-          position={[(i - (n - 1) / 2) * gap, cubeY, 0]}
+          position={[(i - (n - 1) / 2) * gap, cubeY, cubeZ]}
         />
       ))}
     </group>

@@ -24,15 +24,20 @@ export function SceneEnvironment() {
         intensity={isDay ? 0.5 : 0.03}
         position={[3, 1, -2]}
         castShadow
-        // 1024 cukup untuk ruangan sekecil ini; 2048 memboroskan memori &
-        // bandwidth shadow tanpa beda visual yang terlihat.
-        shadow-mapSize-width={1024}
-        shadow-mapSize-height={1024}
-        shadow-camera-far={50}
-        shadow-camera-left={-5}
-        shadow-camera-right={5}
-        shadow-camera-top={5}
-        shadow-camera-bottom={-5}
+        // Frustum shadow DIRAPATKAN ke ukuran ruangan (~±2.5) — sebelumnya ±5
+        // (area 10×10m) membuang texel shadow map sehingga timbul "shadow acne"
+        // (pola grid/titik di permukaan pintu & kredensa), apalagi pada 1024.
+        shadow-mapSize-width={2048}
+        shadow-mapSize-height={2048}
+        shadow-camera-near={0.1}
+        shadow-camera-far={12}
+        shadow-camera-left={-2.5}
+        shadow-camera-right={2.5}
+        shadow-camera-top={2.5}
+        shadow-camera-bottom={-2.5}
+        // geser sampling bayangan sepanjang normal -> hilangkan acne sisa
+        shadow-normalBias={0.03}
+        shadow-bias={-0.0001}
       />
     </>
   )

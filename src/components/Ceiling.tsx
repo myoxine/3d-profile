@@ -65,16 +65,21 @@ export function Ceiling({ size = [3, 3], color = '#dCEBFF', ...props }: CeilingP
       {/* Cahaya nyata dari plafon (hanya saat on).
           z lokal positif = ke bawah (ke arah ruangan) setelah plafon dirotasi. */}
       {ceilingOn && (
-        <pointLight
-          position={[0, 0, 0.25]}
-          color={color}
-          intensity={5}
-          distance={9}
-          decay={2}
-          castShadow
-          shadow-mapSize-width={1024}
-          shadow-mapSize-height={1024}
-        />
+        <>
+          {/* lampu utama lebih terang + jangkauan lebih luas */}
+          <pointLight
+            position={[0, 0, 0.25]}
+            color={color}
+            intensity={18}
+            distance={14}
+            decay={2}
+            castShadow
+            shadow-mapSize-width={1024}
+            shadow-mapSize-height={1024}
+          />
+          {/* fill lembut supaya sudut ruangan tidak gelap (tidak remang-remang) */}
+          <ambientLight color={color} intensity={0.55} />
+        </>
       )}
     </group>
   )
