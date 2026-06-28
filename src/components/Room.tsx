@@ -29,6 +29,7 @@ import { SocialShelf } from './SocialShelf'
 import { BookShelf } from './BookShelf'
 import { Cactus } from './Cactus'
 import { useFocus } from '../store/useFocus'
+import { sfx, primeAudio } from '../audio/sound'
 export const Room = () => {
     const deskScale = 1.5 / 2;
     const doorScale = 2.5 / 2.138395843336184
@@ -37,6 +38,8 @@ export const Room = () => {
     // (interaktivitas di dalam layar komputer akan ditambahkan nanti)
     const deskClick = (e: { stopPropagation: () => void }) => {
         e.stopPropagation()
+        primeAudio()
+        sfx.whoosh()
         setView('desk')
     }
     const pointer = {

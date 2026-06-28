@@ -11,6 +11,7 @@ import { Html } from '@react-three/drei'
 import { SVGLoader } from 'three-stdlib'
 import { LINKS, openLink } from '../config/links'
 import { useFocus } from '../store/useFocus'
+import { sfx, primeAudio } from '../audio/sound'
 
 // Path single-path brand (viewBox 24x24).
 const PATHS: Record<string, string> = {
@@ -76,7 +77,12 @@ function LogoCube({ name, label, url, bg, size, spin, position }: CubeProps) {
   ]
 
   useFrame((_, dt) => {
-    if (ref.current) ref.current.rotation.y += spin * dt
+    if (!ref.current) return
+    ref.current.rotation.y += spin * dt
+    // micro-interaction: membesar lembut saat hover (di area Contact)
+    const target = hovered && active ? 1.16 : 1
+    const s = THREE.MathUtils.damp(ref.current.scale.x, target, 10, dt)
+    ref.current.scale.setScalar(s)
   })
 
   return (
@@ -85,6 +91,8 @@ function LogoCube({ name, label, url, bg, size, spin, position }: CubeProps) {
       position={position}
       onClick={(e) => {
         e.stopPropagation()
+        primeAudio()
+        sfx.click()
         openLink(url)
       }}
       onPointerOver={(e) => {
@@ -92,6 +100,7 @@ function LogoCube({ name, label, url, bg, size, spin, position }: CubeProps) {
         e.stopPropagation()
         document.body.style.cursor = 'pointer'
         setHovered(true)
+        sfx.hover()
       }}
       onPointerOut={() => {
         document.body.style.cursor = 'auto'
