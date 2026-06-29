@@ -180,10 +180,10 @@ Lessons Learned in Part 7
 
 — — —
 
-What’s Next
+What’s Next (Part 8)
 
-The room is now alive: people, a ticking clock, glowing signage, switchable lamps. From here you could add scroll-driven camera moves, clickable hotspots that open project details, or lazy-loading so the heavy character GLBs stream in after first paint.
+The room is now alive: people, a ticking clock, glowing signage, switchable lamps. But a visitor still has to fly the camera around by hand to find anything. In Part 8 we turn it into a guided experience: a zustand state store that works both inside and outside the R3F Canvas, swapping OrbitControls for CameraControls with named “view” presets the camera animates to, and a menu bar that flies you to each area plus an Exit button.
 
-Thanks for following the series — go make your room yours.
+Thanks for following along — go make your room navigable next.
 
 Asset credits: characters & animations from Mixamo / Ready Player Me; wall clock and lamp are free GLB/glTF assets (see each model’s license); typeface helvetiker_regular from the three.js examples; Bloom via @react-three/postprocessing.
