@@ -114,6 +114,8 @@ export function useLighting() {
 
 > 💡 We put the provider **inside** the `<Canvas>` so every 3D component (switches, lamps, environment) can call `useLighting()`.
 
+> 🔄 **Evolution note (final code).** Two later refinements: (1) The finished project **defaults the ceiling lamp ON when the system is in dark mode / night** — a pitch-black room on first load looked broken, so `ceilingOn` is initialized from the same `prefers-color-scheme` check (`useState(getSystemTimeOfDay() === 'night')`) and the media-query handler flips it live. (2) A **fourth lamp + switch** (`sofaOn` / `toggleSofa`, for the lamps behind the sofa) is added in Part 7, so the final `LightingState` has four toggles, not three.
+
 ---
 
 ## Step 3 — A Day / Night Environment

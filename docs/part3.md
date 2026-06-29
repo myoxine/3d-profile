@@ -182,6 +182,8 @@ pivotRef.current.rotation.y = Math.sin(time * speed) * maxAngle
 
 A gentle sway makes it feel alive without making your visitors seasick. 😉
 
+> 🔄 **Evolution note (final code).** In the finished project this rocking animation is **disabled** — the `useFrame` rotation is commented out and the chair sits still. Once the room filled up with people, a desktop you focus the camera on, and click-to-focus navigation (Parts 7–9), a perpetually swaying chair became a distraction rather than a delight. The component (`AnimatedSpinningChair` → `GamingChair`) is kept exactly as below; only the one rotation line is commented out. Re-enable it any time by uncommenting `pivotRef.current.rotation.y = angle`.
+
 ---
 
 ## Loading the Adjustable Desk
@@ -234,7 +236,7 @@ export const Room = () => {
       <Wall
         wallSize={[3.1, 4]}
         position={[1.5, 0, -0.05]}
-        rotationY={0.5 * Math.PI}
+        rotation={[0, 0.5 * Math.PI, 0]}
         holePosition={[0.5, -0.2]}
         holeSize={[1.1, 1.6]}
       />
@@ -243,7 +245,7 @@ export const Room = () => {
       <Wall
         wallSize={[3.1, 4]}
         position={[-1.5, 0, -0.05]}
-        rotationY={0.5 * Math.PI}
+        rotation={[0, 0.5 * Math.PI, 0]}
       />
 
       {/* Window */}
@@ -309,25 +311,29 @@ Finally, integrate your `Room` and `Loader`:
 ```tsx
 // src/App.tsx
 
-import React, { Suspense } from 'react'
+import { Suspense } from 'react'
 import { Canvas } from '@react-three/fiber'
+import { OrbitControls } from '@react-three/drei'
 import { Room } from './components/Room'
 import { Loader } from './components/Loader'
 
 export default function App() {
   return (
-    <Canvas
-      shadows
-      camera={{ fov: 50, position: [0, 2, 5] }}
-      style={{ height: '100vh', width: '100vw' }}
-    >
-      <Suspense fallback={<Loader />}>
-        <Room />
-      </Suspense>
-    </Canvas>
+    <div style={{ width: '100vw', height: '100vh' }}>
+      <Canvas camera={{ position: [0, 2, 1], fov: 60 }} shadows>
+        <ambientLight intensity={1} />
+        <directionalLight position={[0, 2, 3]} intensity={1} castShadow />
+        <OrbitControls />
+        <Suspense fallback={<Loader />}>
+          <Room />
+        </Suspense>
+      </Canvas>
+    </div>
   )
 }
 ```
+
+> 🎥 We keep the **same camera** (`position={[0, 2, 1]}`, `fov={60}`) and the `OrbitControls` + lights from Parts 1–2 — Part 3 only *adds* the `Suspense` + `Loader` so the screen isn't blank while the GLB models stream in.
 
 ✅ This ensures:
 

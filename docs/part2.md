@@ -52,8 +52,10 @@ For this tutorial, we'll use two free 3D assets:
 public/
   models/
     Adjustable Desk.glb
-    Gaming Chair.glb
+    gaming chair.glb
 ```
+
+> ⚠️ **Mind the filename case.** We load this model as `/models/gaming chair.glb` (lowercase). Windows treats `Gaming Chair.glb` and `gaming chair.glb` as the same file, but Linux hosts (Vercel, Netlify, GitHub Pages) are **case-sensitive** — a capitalized filename that works locally will 404 in production. Keep the file and the `useGLTF(...)` path identical.
 
 If your models come with texture images (like JPG or PNG files), copy those into the same `public/models` folder. This way, your app can easily load and display the textures when rendering the models.
 
@@ -151,21 +153,23 @@ import * as THREE from 'three'
 import { useMemo, useRef } from 'react'
 import { Mesh } from 'three'
 import { useTexture } from '@react-three/drei'
+import type { JSX } from 'react'
 
-export interface WallProps {
-  position?: [number, number, number]
+// Wall extends the standard <group> props, so position / rotation / scale
+// all work like any other R3F object. (We intentionally do NOT add a custom
+// `rotationY` prop — rotating via the group's `rotation` prop keeps the API
+// consistent with the rest of the scene.)
+export type WallProps = JSX.IntrinsicElements['group'] & {
   wallSize?: [number, number]
   holeSize?: [number, number]
   holePosition?: [number, number]
-  rotationY?: number
 }
 
 export const Wall = ({
-  position = [0, 0, 0],
   wallSize = [10, 5],
   holeSize,
   holePosition = [0, 0],
-  rotationY = 0
+  ...props
 }: WallProps) => {
   const meshRef = useRef<Mesh>(null!)
 
@@ -222,23 +226,23 @@ export const Wall = ({
   })
 
   return (
-    <mesh
-      ref={meshRef}
-      geometry={wallGeometry}
-      position={position}
-      rotation-y={rotationY}
-      receiveShadow
-      castShadow
-    >
-      <meshStandardMaterial
-        map={colorMap}
-        roughnessMap={roughnessMap}
-        normalMap={normalMap}
-        displacementMap={displacementMap}
-        displacementScale={0}
-        color={'white'}
-      />
-    </mesh>
+    <group {...props} dispose={null}>
+      <mesh
+        ref={meshRef}
+        geometry={wallGeometry}
+        receiveShadow
+        castShadow
+      >
+        <meshStandardMaterial
+          map={colorMap}
+          roughnessMap={roughnessMap}
+          normalMap={normalMap}
+          displacementMap={displacementMap}
+          displacementScale={0}
+          color={'white'}
+        />
+      </mesh>
+    </group>
   )
 }
 ```
@@ -374,11 +378,11 @@ export const Room = () => {
       <Wall
         wallSize={[3.1, 4]}
         position={[1.5, 0, -0.05]}
-        rotationY={0.5 * Math.PI}
+        rotation={[0, 0.5 * Math.PI, 0]}
         holePosition={[0.5, 0]}
         holeSize={[1.1, 1.6]}
       />
-      <Wall wallSize={[3.1, 4]} position={[-1.5, 0, -0.05]} rotationY={0.5 * Math.PI} />
+      <Wall wallSize={[3.1, 4]} position={[-1.5, 0, -0.05]} rotation={[0, 0.5 * Math.PI, 0]} />
       <Window
         width={1}
         height={1.5}

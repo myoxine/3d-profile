@@ -127,6 +127,20 @@ export const Room = () => {
 
 Boom — you have a realistic 3D door with hinges!
 
+> 🔄 **Evolution note (final code).** Two things changed later. (1) The `useLayoutEffect` with `console.log('Model Door Size')` above is **debug scaffolding** — handy while you dial in the scale, but remove it before shipping (we clean it up in Part 10). (2) This door's baked `Door_colors` texture rendered as a distracting woven/grid pattern under compression, so in the final project we **drop the glTF materials and assign plain inline materials instead** — a warm off-white panel and near-black metal for the handle and hinges:
+>
+> ```tsx
+> <mesh geometry={nodes.Cube157.geometry} castShadow receiveShadow>
+>   <meshStandardMaterial color="#d8d3c8" roughness={0.8} metalness={0} />
+> </mesh>
+> <mesh geometry={nodes.Cube157_1.geometry} castShadow receiveShadow>
+>   <meshStandardMaterial color="#141414" roughness={0.4} metalness={0.6} />
+> </mesh>
+> <mesh geometry={nodes.Cube157_2.geometry} castShadow receiveShadow>
+>   <meshStandardMaterial color="#141414" roughness={0.4} metalness={0.6} />
+> </mesh>
+> ```
+
 ---
 
 ## Step 2 — Add a Modern Ceiling
@@ -207,6 +221,8 @@ This instantly:
 - ✅ Adds global ambient light
 - ✅ Generates realistic reflections on materials
 - ✅ Makes your space feel alive
+
+> 🔄 **Evolution note (final code).** We load the **4k** HDRI here for the nicest preview, but a 4k `.hdr` is heavy (several MB). In the final project — once the page weight became a real concern (Part 10) — we switch to the **1k** version, `dikhololo_sunset_1k.hdr`. For a room this size, lit mostly by our own lamps, the 1k environment is visually indistinguishable and loads far faster. If you're optimizing, grab the 1k download from Poly Haven and update the `files` path.
 
 ---
 
@@ -357,12 +373,14 @@ Your 3D website is evolving from a collection of models into a real virtual spac
 
 ## Coming Up Next…
 
-In the next part of this series, we'll:
+In the next part (Part 5), we'll make the room **interactive and atmospheric**:
 
-- Add clickable interactivity to objects
-- Enable color and material customization
-- Integrate sound effects for a multi-sensory experience
-- Explore lighting presets for day, night, or dramatic moods
+- A central lighting "brain" any component can read and control
+- **Clickable 3D light switches** that physically flip
+- An LED ceiling, a standing lamp, and a table lamp that emit real light
+- Automatic **day / night** that follows your system's dark mode
+
+(Sound effects and online deployment come later in the series — Parts 12 and 13.)
 
 Your 3D profile website is on its way to becoming a stunning interactive portfolio!
 
