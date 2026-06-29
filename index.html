@@ -1,10 +1,67 @@
 <!doctype html>
-<html lang="en">
+<html lang="id">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React + TS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+
+    <!-- ===== Identitas & SEO dasar ===== -->
+    <!-- GANTI domain di bawah dengan URL produksi kamu setelah deploy.
+         OG/Twitter butuh URL ABSOLUT — path relatif tidak akan tampil di preview. -->
+    <title>Hadi Halim · Interactive 3D Portfolio</title>
+    <meta
+      name="description"
+      content="Portofolio 3D interaktif Hadi Halim — sebuah ruangan yang bisa kamu jelajahi: tur kamera, desktop yang bisa diklik, CV, dan tutorial. Dibangun dengan React Three Fiber."
+    />
+    <meta name="author" content="Hadi Halim" />
+    <meta name="keywords" content="Hadi Halim, 3D portfolio, React Three Fiber, WebGL, three.js, frontend developer, portofolio interaktif" />
+    <link rel="canonical" href="https://hadi-3d-profile.vercel.app/" />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#1a160f" />
+
+    <!-- ===== Favicon & ikon ===== -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <!-- ===== Open Graph (Facebook, LinkedIn, WhatsApp, dll.) ===== -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Hadi Halim · 3D Portfolio" />
+    <meta property="og:title" content="Hadi Halim · Interactive 3D Portfolio" />
+    <meta
+      property="og:description"
+      content="Sebuah ruangan 3D yang bisa kamu jelajahi — tur kamera, desktop interaktif, CV, dan tutorial. Dibangun dengan React Three Fiber."
+    />
+    <meta property="og:url" content="https://hadi-3d-profile.vercel.app/" />
+    <meta property="og:image" content="https://hadi-3d-profile.vercel.app/images/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Hadi Halim — Interactive 3D Portfolio" />
+    <meta property="og:locale" content="id_ID" />
+
+    <!-- ===== Twitter / X Card ===== -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Hadi Halim · Interactive 3D Portfolio" />
+    <meta
+      name="twitter:description"
+      content="Sebuah ruangan 3D yang bisa kamu jelajahi — tur kamera, desktop interaktif, CV, dan tutorial. Dibangun dengan React Three Fiber."
+    />
+    <meta name="twitter:image" content="https://hadi-3d-profile.vercel.app/images/og-image.png" />
+
+    <!-- ===== Performa: hangatkan koneksi ke CDN decoder Draco (drei) ===== -->
+    <link rel="preconnect" href="https://www.gstatic.com" crossorigin />
+    <link rel="dns-prefetch" href="https://www.gstatic.com" />
+
+    <!-- ===== Data terstruktur (rich result Google) ===== -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Hadi Halim",
+        "url": "https://hadi-3d-profile.vercel.app/",
+        "jobTitle": "Frontend / 3D Web Developer",
+        "image": "https://hadi-3d-profile.vercel.app/images/og-image.png"
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>
