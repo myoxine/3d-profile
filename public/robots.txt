@@ -1,0 +1,5 @@
+# Hadi Halim · 3D Portfolio
+User-agent: *
+Allow: /
+
+Sitemap: https://hadi-3d-profile.vercel.app/sitemap.xml
