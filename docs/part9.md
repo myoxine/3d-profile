@@ -366,7 +366,7 @@ It's the same `<Suspense>` you already use for the whole scene — the trick is 
 
 ---
 
-## What's Next
+## What's Next (Part 10)
 
 The room is now genuinely interactive: a desktop you can click, a resume you can read, tooltips that teach, a guided tour, and links you can share. From here the series can turn outward — **performance budgets** (draco/meshopt compression, instancing, on-demand frames), **mobile controls & layout**, and finally **deploying** the whole thing so recruiters can walk through your portfolio from a single link.
 
@@ -374,9 +374,15 @@ Thanks for following along — go make your room *talk back*. 🖥️
 
 ---
 
-### Asset Credits
+## Asset Credits
 
 - Avatars — [Ready Player Me](https://readyplayer.me/)
 - DOM-in-3D — `<Html>` from [@react-three/drei](https://github.com/pmndrs/drei)
 - State — [zustand](https://github.com/pmndrs/zustand)
 - Project & experience content — from the author's CV
+
+---
+
+## 📦 Full Source Code
+
+👉 Explore the complete code for this part on the [`part9` branch](https://github.com/myoxine/3d-profile/tree/part9).

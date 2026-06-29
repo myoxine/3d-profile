@@ -1,6 +1,6 @@
 # 3D Profile Website - Part 12: Make It Delightful — Procedural Audio, a Real Loading Screen & Micro-Interactions
 
-Welcome back — and this is the **finale** of the 3D Profile Website series!
+Welcome back — and this is the **last build part** of the 3D Profile Website series! (One short part remains after this: shipping it online.)
 
 The room is fast (Part 10), works on a phone (Part 11), and every model is intact. What's left is the layer that separates "a demo" from "a *product*": the little touches you don't consciously notice but absolutely feel. In **Part 12** we add the polish:
 
@@ -11,6 +11,12 @@ The room is fast (Part 10), works on a phone (Part 11), and every model is intac
 ✅ **Micro-interactions** — buttons that lift, cubes that swell on hover
 
 None of this is hard. All of it matters. Let's finish strong.
+
+---
+
+## Why Polish Matters
+
+The room already works — so why spend a whole part on sounds, easing curves, and 2-pixel hover lifts? Because *working* and *feeling finished* are different things. Polish is the layer a visitor never consciously notices but absolutely feels: a click that responds, a view that glides instead of snapping, a loading screen that looks designed. It's the difference between "a cool demo someone built" and "a product." None of it is technically hard; all of it is what makes the portfolio memorable.
 
 ---
 
@@ -182,16 +188,34 @@ useFrame((_, dt) => {
 
 ---
 
-## The End — and What You've Built
+## What You've Built So Far
 
 Twelve parts ago this was an empty `<Canvas>`. Now it's a **navigable, interactive, fast, mobile-friendly, delightful 3D portfolio**: a room you can tour, a desktop you can click, a résumé you can read, tutorials you can open, lights you can flip — and now, one that *sounds* and *feels* like a finished product.
 
-Everything except the final mile — **deployment** — is done. Put it behind a URL and let it speak for you. Thanks for building the whole thing alongside me. 🏠✨
+Everything except the final mile — **deployment** — is done. That's exactly what we tackle next.
 
 ---
 
-### Asset Credits
+## What's Next (Part 13)
+
+The room looks, works, sounds, and feels finished. All that's left is to put it **online** — the focus of **Part 13**:
+
+- 📦 A **production build** and deploying the static SPA (to Vercel)
+- ⚡ **Cache headers** so the 40 MB of 3D assets load instantly on return visits
+- 🔎 **SEO & social meta** — Open Graph, Twitter Card, a real 1200×630 share image, favicon, and a web manifest
+
+Put it behind a URL and let it speak for you — see you in the finale. 🏠✨
+
+---
+
+## Asset Credits
 
 - Sound — synthesized at runtime with the [Web Audio API](https://developer.mozilla.org/docs/Web/API/Web_Audio_API) (no files)
 - Loading progress — `useProgress` from [@react-three/drei](https://github.com/pmndrs/drei)
 - State — [zustand](https://github.com/pmndrs/zustand)
+
+---
+
+## 📦 Full Source Code
+
+👉 Explore the complete code for this part on the [`part12` branch](https://github.com/myoxine/3d-profile/tree/part12).

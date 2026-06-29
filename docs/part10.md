@@ -243,7 +243,7 @@ Could we go smaller? Yes — meshopt or aggressive Draco would get the avatars t
 
 ---
 
-## What's Next
+## What's Next (Part 11)
 
 The portfolio is now a quarter of its weight and every model is intact. That sets up **Part 11 — Mobile & Responsive**: touch controls, a menu that reflows on small screens, and a quality tier for weaker GPUs. After that, **Part 12 — Audio & Polish**.
 
@@ -251,8 +251,14 @@ Thanks for following along — go put your room on a diet, *carefully*. ⚡
 
 ---
 
-### Asset Credits
+## Asset Credits
 
 - Geometry compression — [glTF-Transform](https://gltf-transform.dev/) · [Draco](https://github.com/google/draco)
 - HDRI resize — [OpenCV](https://opencv.org/) · original HDRI from [Poly Haven](https://polyhaven.com/)
 - Avatars — [Ready Player Me](https://readyplayer.me/)
+
+---
+
+## 📦 Full Source Code
+
+👉 Explore the complete code for this part on the [`part10` branch](https://github.com/myoxine/3d-profile/tree/part10).

@@ -225,7 +225,7 @@ Two gotchas that cost real time here — and how to fix them:
 
 ---
 
-## Lessons on Asset File Size
+## A Note on Asset File Size
 
 Two models nearly broke this build:
 
@@ -236,19 +236,29 @@ Rules of thumb: inspect every download, prefer low-poly, resize textures, and ke
 
 ---
 
-## What You've Built
+## Lessons Learned in Part 6
 
-✅ A laptop and monitor on the desk
-✅ A clickable TV playing a YouTube video, correctly occluded by the room
-✅ A reusable `PhotoFrame` for any image
-✅ A gallery of your photo, diplomas, and certificates
-✅ A reusable pipeline: PDF → PNG → resized texture
-
-Your room is now unmistakably **yours**.
+- **A reusable component beats one-off meshes.** One `PhotoFrame` with props renders your photo, every diploma, and every certificate — the gallery wall is just data.
+- **Render a video onto a material to make a "playable" screen.** A `<Html>` overlay (or video texture) turns the TV mesh into something a visitor can actually click and watch.
+- **Build a content pipeline, not a pile of exports.** PDF → PNG → resized texture is a repeatable recipe; do it once and every credential drops straight in.
+- **Inspect every download before you trust it.** A "monitor" can secretly be a 47 MB scene; a sofa can be 94 MB. Prefer low-poly, resize textures, keep assets well under ~10 MB.
+- Your room is now unmistakably **yours**.
 
 ---
 
-## Credits
+## What's Next (Part 7)
+
+The room is furnished and personal — but it's empty of people and frozen in time. Next we **bring it to life**:
+
+- 🧍 **Animated characters** from Mixamo (someone typing at the desk, people on the sofa)
+- 🧑‍🎨 A drop-in pipeline for **Ready Player Me avatars** (real textures, real eyes)
+- 🕐 A **wall clock whose hands track your real system time**
+- ✨ A glowing **neon sign** built from extruded 3D letters + Bloom
+- 💡 Two **lamps behind the sofa** wired to a new **4th light switch**
+
+---
+
+## Asset Credits
 
 - **Laptop, Monitor, TV** — free GLB models (verify each license before commercial use).
 - Photo, diplomas, and certificates — the author's own.
@@ -256,16 +266,8 @@ Your room is now unmistakably **yours**.
 
 ---
 
-## Coming Up Next…
-
-- Clickable hotspots that focus the camera and reveal info panels (projects, about, contact)
-- A guided tour and smooth camera transitions
-- Deploying your 3D portfolio online
-
-The room is furnished and personal — next we make it *navigable*.
-
----
-
 ## 📦 Full Source Code
 
-👉 The `part6` branch contains everything: the `Laptop`, `Monitor`, and `Tv` components, the reusable `PhotoFrame`, the gallery layout, and the PDF/image pipeline.
+👉 Explore the complete code for this part on the [`part6` branch](https://github.com/myoxine/3d-profile/tree/part6).
+
+The `part6` branch contains everything: the `Laptop`, `Monitor`, and `Tv` components, the reusable `PhotoFrame`, the gallery layout, and the PDF/image pipeline.

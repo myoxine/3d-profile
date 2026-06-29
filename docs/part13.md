@@ -14,6 +14,12 @@ A portfolio nobody can open is a private art project. In **Part 13** we put the 
 
 ---
 
+## Why Shipping Matters
+
+Twelve parts of work live on `localhost` — which means, to everyone but you, they don't exist yet. A portfolio's entire job is to be *seen*: opened from a résumé link, shared in a DM, skimmed by a recruiter on their phone. That makes deployment not an afterthought but the part that finally connects the work to an audience — and the share-preview metadata is what decides whether that link looks like a polished product or a broken thumbnail. This part closes the gap between "it runs on my machine" and "anyone, anywhere, can walk through it."
+
+---
+
 ## Step 1 — What `npm run build` Really Produces
 
 Our `build` script is `tsc -b && vite build`: type-check the whole project, then bundle. The output lands in `dist/` — a fully static folder. No Node server, no runtime. That's the whole point: a 3D portfolio is just files a CDN can serve.
@@ -222,9 +228,15 @@ That's the series. From a black screen to a room with the lights on, behind a do
 
 ---
 
-### Asset Credits
+## Asset Credits
 
 - Hosting — [Vercel](https://vercel.com) (static, CDN, custom domains)
 - OG image — generated as a 1200×630 card (gradient + gold title)
 - Icons & favicon — custom "H" monogram (SVG + PNG)
 - SEO testing — [Facebook Sharing Debugger](https://developers.facebook.com/tools/debug/), [opengraph.xyz](https://www.opengraph.xyz/)
+
+---
+
+## 📦 Full Source Code
+
+👉 Explore the complete code for this part on the [`part13` branch](https://github.com/myoxine/3d-profile/tree/part13).

@@ -114,6 +114,8 @@ export function useLighting() {
 
 > 💡 We put the provider **inside** the `<Canvas>` so every 3D component (switches, lamps, environment) can call `useLighting()`.
 
+> 🔄 **Evolution note (final code).** Two later refinements: (1) The finished project **defaults the ceiling lamp ON when the system is in dark mode / night** — a pitch-black room on first load looked broken, so `ceilingOn` is initialized from the same `prefers-color-scheme` check (`useState(getSystemTimeOfDay() === 'night')`) and the media-query handler flips it live. (2) A **fourth lamp + switch** (`sofaOn` / `toggleSofa`, for the lamps behind the sofa) is added in Part 7, so the final `LightingState` has four toggles, not three.
+
 ---
 
 ## Step 3 — A Day / Night Environment
@@ -381,20 +383,31 @@ To make the space feel lived-in, we drop in a few more GLB props. Each is conver
 
 ---
 
-## What You've Built
+## Lessons Learned in Part 5
 
-✅ A central lighting system any component can read and control
-✅ Clickable 3D switches with a satisfying rocker flip
-✅ An LED ceiling, a standing lamp, and a table lamp that emit real light
-✅ Automatic day / night that follows the user's system theme
-✅ Bloom glow that sells the light sources
-✅ A cozy, furnished room — sofa, AC, credenza, plant
-
-Your 3D website is no longer just a model you orbit around — it's a little space people can **interact with**.
+- **State, not props, for cross-cutting concerns.** Lighting touches switches, lamps, and the environment — a central Context (or store) beats threading booleans through the whole tree.
+- **Emissive + Bloom = believable light.** A bulb that doesn't visibly glow looks fake; make it `emissive` with `toneMapped={false}` and let Bloom bleed the bright parts.
+- **Respect the user's context.** Read `prefers-color-scheme` for day/night instead of guessing — and update it live with a `matchMedia` listener.
+- **Animate the *button*, not the frame.** The switch's rocker flips via `useFrame` + `lerp` while the GLB plate stays put — small, physical, satisfying.
+- **Watch your `.glb` sizes.** One bloated model tanks load time; prefer low-poly or compress (the focus of Part 10).
+- Your 3D website is no longer just a model you orbit around — it's a little space people can **interact with**.
 
 ---
 
-## Credits
+## What's Next (Part 6)
+
+The room is interactive — next we make it **personal**, filling it with *your* content:
+
+- 💻 A **laptop and a monitor** on the desk
+- 📺 A **TV you can click to play a YouTube video** right on the screen
+- 🖼️ A reusable **PhotoFrame** component and a **gallery wall** of your photo, diplomas, and certificates
+- 📄 A practical workflow to turn **PDFs and images into web-ready textures**
+
+Your 3D profile website is well on its way to becoming a stunning interactive portfolio!
+
+---
+
+## Asset Credits
 
 All 3D assets below are free models — please check each asset's license before commercial use.
 
@@ -409,22 +422,11 @@ All 3D assets below are free models — please check each asset's license before
 
 ---
 
-## Coming Up Next…
-
-In the next part we'll keep pushing the interactivity:
-
-- Clickable objects that reveal info (projects, about, contact)
-- Smooth camera transitions to focus on areas of the room
-- Sound effects for a multi-sensory feel
-- Saving the user's light preferences
-
-Your 3D profile website is well on its way to becoming a stunning interactive portfolio!
-
----
-
 ## 📦 Full Source Code
 
-👉 The `part5` branch contains everything from this tutorial:
+👉 Explore the complete code for this part on the [`part5` branch](https://github.com/myoxine/3d-profile/tree/part5).
+
+The `part5` branch contains everything from this tutorial:
 - The `LightingContext` + day/night logic
 - Interactive `LightSwitch`, the LED `Ceiling`, `StandingLamp`, and `TableLamp`
 - Bloom setup and all the new furniture

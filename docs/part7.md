@@ -254,17 +254,27 @@ A good reminder: **animation is a choice per object**, not a default. Movement s
 
 ---
 
-## What's Next
+## What's Next (Part 8)
 
-The room is now alive: people, a ticking clock, glowing signage, switchable lamps. From here you could add **scroll-driven camera moves**, **clickable hotspots** that open project details, or **lazy-loading** so the heavy character GLBs stream in after first paint.
+The room is now alive: people, a ticking clock, glowing signage, switchable lamps. But a visitor still has to fly the camera around by hand to find anything. In **Part 8** we turn it into a *guided* experience:
 
-Thanks for following the series — go make your room *yours*. 🎬
+- 🗃️ A **state store (zustand)** that works both inside and outside the R3F Canvas
+- 🎥 Replacing `OrbitControls` with **`CameraControls`** and a set of **named "view" presets** the camera animates to
+- 🧭 A **menu bar** that flies you to each area of the room, plus an **Exit** button
+
+Thanks for following along — go make your room *navigable* next. 🎬
 
 ---
 
-### Asset Credits
+## Asset Credits
 
 - Characters & animations — [Mixamo](https://www.mixamo.com) / [Ready Player Me](https://readyplayer.me)
 - Wall clock, lamp — free GLB/glTF assets (see each model's source license)
 - Typeface — `helvetiker_regular` from the [three.js](https://github.com/mrdoob/three.js) examples
 - Post-processing — [@react-three/postprocessing](https://github.com/pmndrs/react-postprocessing) (Bloom)
+
+---
+
+## 📦 Full Source Code
+
+👉 Explore the complete code for this part on the [`part7` branch](https://github.com/myoxine/3d-profile/tree/part7).

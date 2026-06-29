@@ -173,7 +173,7 @@ Good news: almost nothing to do. drei's **`CameraControls` is touch-native** —
 
 ---
 
-## What's Next
+## What's Next (Part 12)
 
 The portfolio now adapts from desktop to a phone in portrait: it renders within budget, frames correctly, and the menu fits a thumb. That leaves the fun finishing touches for **Part 12 — Audio & Polish**: ambient room tone and click SFX, smoother camera easing, a friendlier loading screen, and a few small delights. After that, it's a portfolio you can confidently drop into a résumé link.
 
@@ -181,7 +181,13 @@ Thanks for following along — go shrink your room to pocket size. 📱
 
 ---
 
-### Asset Credits
+## Asset Credits
 
 - Camera controls — [`camera-controls`](https://github.com/yomotsu/camera-controls) via [@react-three/drei](https://github.com/pmndrs/drei)
 - Responsive signal — the platform's own [`window.matchMedia`](https://developer.mozilla.org/docs/Web/API/Window/matchMedia)
+
+---
+
+## 📦 Full Source Code
+
+👉 Explore the complete code for this part on the [`part11` branch](https://github.com/myoxine/3d-profile/tree/part11).
