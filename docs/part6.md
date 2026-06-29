@@ -225,7 +225,7 @@ Two gotchas that cost real time here — and how to fix them:
 
 ---
 
-## Lessons on Asset File Size
+## A Note on Asset File Size
 
 Two models nearly broke this build:
 
@@ -236,27 +236,17 @@ Rules of thumb: inspect every download, prefer low-poly, resize textures, and ke
 
 ---
 
-## What You've Built
+## Lessons Learned in Part 6
 
-✅ A laptop and monitor on the desk
-✅ A clickable TV playing a YouTube video, correctly occluded by the room
-✅ A reusable `PhotoFrame` for any image
-✅ A gallery of your photo, diplomas, and certificates
-✅ A reusable pipeline: PDF → PNG → resized texture
-
-Your room is now unmistakably **yours**.
+- **A reusable component beats one-off meshes.** One `PhotoFrame` with props renders your photo, every diploma, and every certificate — the gallery wall is just data.
+- **Render a video onto a material to make a "playable" screen.** A `<Html>` overlay (or video texture) turns the TV mesh into something a visitor can actually click and watch.
+- **Build a content pipeline, not a pile of exports.** PDF → PNG → resized texture is a repeatable recipe; do it once and every credential drops straight in.
+- **Inspect every download before you trust it.** A "monitor" can secretly be a 47 MB scene; a sofa can be 94 MB. Prefer low-poly, resize textures, keep assets well under ~10 MB.
+- Your room is now unmistakably **yours**.
 
 ---
 
-## Credits
-
-- **Laptop, Monitor, TV** — free GLB models (verify each license before commercial use).
-- Photo, diplomas, and certificates — the author's own.
-- Built with [React Three Fiber](https://r3f.docs.pmnd.rs/), [drei](https://github.com/pmndrs/drei), [pdf-to-img](https://www.npmjs.com/package/pdf-to-img), and [sharp](https://sharp.pixelplumbing.com/).
-
----
-
-## Coming Up Next… (Part 7)
+## What's Next (Part 7)
 
 The room is furnished and personal — but it's empty of people and frozen in time. Next we **bring it to life**:
 
@@ -265,6 +255,14 @@ The room is furnished and personal — but it's empty of people and frozen in ti
 - 🕐 A **wall clock whose hands track your real system time**
 - ✨ A glowing **neon sign** built from extruded 3D letters + Bloom
 - 💡 Two **lamps behind the sofa** wired to a new **4th light switch**
+
+---
+
+## Asset Credits
+
+- **Laptop, Monitor, TV** — free GLB models (verify each license before commercial use).
+- Photo, diplomas, and certificates — the author's own.
+- Built with [React Three Fiber](https://r3f.docs.pmnd.rs/), [drei](https://github.com/pmndrs/drei), [pdf-to-img](https://www.npmjs.com/package/pdf-to-img), and [sharp](https://sharp.pixelplumbing.com/).
 
 ---
 

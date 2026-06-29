@@ -383,20 +383,31 @@ To make the space feel lived-in, we drop in a few more GLB props. Each is conver
 
 ---
 
-## What You've Built
+## Lessons Learned in Part 5
 
-✅ A central lighting system any component can read and control
-✅ Clickable 3D switches with a satisfying rocker flip
-✅ An LED ceiling, a standing lamp, and a table lamp that emit real light
-✅ Automatic day / night that follows the user's system theme
-✅ Bloom glow that sells the light sources
-✅ A cozy, furnished room — sofa, AC, credenza, plant
-
-Your 3D website is no longer just a model you orbit around — it's a little space people can **interact with**.
+- **State, not props, for cross-cutting concerns.** Lighting touches switches, lamps, and the environment — a central Context (or store) beats threading booleans through the whole tree.
+- **Emissive + Bloom = believable light.** A bulb that doesn't visibly glow looks fake; make it `emissive` with `toneMapped={false}` and let Bloom bleed the bright parts.
+- **Respect the user's context.** Read `prefers-color-scheme` for day/night instead of guessing — and update it live with a `matchMedia` listener.
+- **Animate the *button*, not the frame.** The switch's rocker flips via `useFrame` + `lerp` while the GLB plate stays put — small, physical, satisfying.
+- **Watch your `.glb` sizes.** One bloated model tanks load time; prefer low-poly or compress (the focus of Part 10).
+- Your 3D website is no longer just a model you orbit around — it's a little space people can **interact with**.
 
 ---
 
-## Credits
+## What's Next (Part 6)
+
+The room is interactive — next we make it **personal**, filling it with *your* content:
+
+- 💻 A **laptop and a monitor** on the desk
+- 📺 A **TV you can click to play a YouTube video** right on the screen
+- 🖼️ A reusable **PhotoFrame** component and a **gallery wall** of your photo, diplomas, and certificates
+- 📄 A practical workflow to turn **PDFs and images into web-ready textures**
+
+Your 3D profile website is well on its way to becoming a stunning interactive portfolio!
+
+---
+
+## Asset Credits
 
 All 3D assets below are free models — please check each asset's license before commercial use.
 
@@ -408,19 +419,6 @@ All 3D assets below are free models — please check each asset's license before
 - **Plant (Cordyline glauca):** [CGTrader](https://www.cgtrader.com/items/6315999/download-page)
 - **HDRI:** *Dikhololo Sunset* — [Poly Haven](https://polyhaven.com/) (CC0)
 - Built with [React Three Fiber](https://r3f.docs.pmnd.rs/), [drei](https://github.com/pmndrs/drei), and [postprocessing](https://github.com/pmndrs/react-postprocessing).
-
----
-
-## Coming Up Next… (Part 6)
-
-The room is interactive — next we make it **personal**, filling it with *your* content:
-
-- 💻 A **laptop and a monitor** on the desk
-- 📺 A **TV you can click to play a YouTube video** right on the screen
-- 🖼️ A reusable **PhotoFrame** component and a **gallery wall** of your photo, diplomas, and certificates
-- 📄 A practical workflow to turn **PDFs and images into web-ready textures**
-
-Your 3D profile website is well on its way to becoming a stunning interactive portfolio!
 
 ---
 

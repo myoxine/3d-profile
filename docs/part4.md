@@ -359,19 +359,17 @@ export default function App() {
 
 ---
 
-## What You've Built
+## Lessons Learned in Part 4
 
-- ✅ A fully enclosed room with a door and ceiling
-- ✅ Natural HDRI lighting for realism
-- ✅ Shadows from directional light
-- ✅ Smooth user exploration with OrbitControls
-- ✅ A cozy environment perfect for a portfolio or interactive website
-
-Your 3D website is evolving from a collection of models into a real virtual space.
+- **A ceiling is what makes a room read as a room.** Enclosing the space traps light and grounds shadows — without it, the scene feels like an open diorama.
+- **HDRI lighting does what point lights can't.** One `<Environment>` map gives soft global illumination *and* realistic reflections for free.
+- **HDRI alone casts no shadows** — pair it with a `directionalLight` (`castShadow`) for sun-like rays and grounding.
+- **Debug scaffolding is for you, not for shipping.** The `console.log('Model Door Size')` here is handy while scaling, but strip it before release (we do, in Part 10).
+- Your 3D website is evolving from a collection of models into a real virtual space.
 
 ---
 
-## Coming Up Next… (Part 5)
+## What's Next (Part 5)
 
 In the next part we'll make the room **interactive and atmospheric**:
 
@@ -383,6 +381,14 @@ In the next part we'll make the room **interactive and atmospheric**:
 (Sound effects and online deployment come later in the series — Parts 12 and 13.)
 
 Your 3D profile website is on its way to becoming a stunning interactive portfolio!
+
+---
+
+## Asset Credits
+
+- **Single Door** (frame, handle, hinges) — [CGTrader](https://www.cgtrader.com/) (free; check terms)
+- **HDRI** — *Dikhololo Sunset* from [Poly Haven](https://polyhaven.com/) (CC0)
+- Built with [React Three Fiber](https://r3f.docs.pmnd.rs/) and [drei](https://github.com/pmndrs/drei)
 
 ---
 

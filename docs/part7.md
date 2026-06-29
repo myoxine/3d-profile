@@ -266,7 +266,7 @@ Thanks for following along — go make your room *navigable* next. 🎬
 
 ---
 
-### Asset Credits
+## Asset Credits
 
 - Characters & animations — [Mixamo](https://www.mixamo.com) / [Ready Player Me](https://readyplayer.me)
 - Wall clock, lamp — free GLB/glTF assets (see each model's source license)

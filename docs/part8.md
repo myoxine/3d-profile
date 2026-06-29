@@ -335,7 +335,7 @@ Thanks for following along — go make your room *navigable*. 🎥
 
 ---
 
-### Asset Credits
+## Asset Credits
 
 - Brand logos — official SVG paths (each brand's trademark belongs to its owner; used here as link affordances)
 - Camera controls — [`camera-controls`](https://github.com/yomotsu/camera-controls) via [@react-three/drei](https://github.com/pmndrs/drei)

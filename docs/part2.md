@@ -401,19 +401,17 @@ export const Room = () => {
 
 ---
 
-## 🎉 What You Have Now
+## Lessons Learned in Part 2
 
-- ✅ A realistic wooden floor
-- ✅ Plaster walls that look like real architecture
-- ✅ Walls with customizable holes for doors or windows
-- ✅ A reflective window with frame
-- ✅ A modern 3D room that's ready to be expanded
-
-Your scene has officially transformed from a blank white box into a beautiful virtual room — the perfect foundation for your interactive 3D profile website.
+- **Textures, not flat colors, sell realism.** A PBR material reads a stack of maps — color, roughness, normal, displacement, AO — and each one does a specific job.
+- **`RepeatWrapping` + `repeat.set()` tile a texture** across a large surface instead of stretching it; tune the repeat to the real-world plank/tile size.
+- **Holes are subtracted geometry.** A wall is a `THREE.Shape`; a window or door is a `THREE.Path` pushed into `shape.holes`, then `ExtrudeGeometry` gives it thickness.
+- **Reusable components keep the scene clean.** `Floor`, `Wall`, and `Window` take props — the room is assembled by composition, not copy-paste meshes.
+- Your scene has officially transformed from a blank white box into a beautiful virtual room — the perfect foundation for the rest of the series.
 
 ---
 
-## 🚀 What's Next (Part 3)
+## What's Next (Part 3)
 
 In the next part, we'll take this even further:
 
@@ -425,8 +423,14 @@ Stay tuned — your 3D profile is about to come to life!
 
 ---
 
-## 📦 Get the Source Code
+## Asset Credits
 
-Want to explore the full working project or customize it yourself?
+- **Wood floor texture** — [WoodFloor039](https://ambientcg.com/) (ambientCG, CC0)
+- **Plaster wall texture** — [Plaster001](https://ambientcg.com/) (ambientCG, CC0)
+- Built with [React Three Fiber](https://r3f.docs.pmnd.rs/) and [drei](https://github.com/pmndrs/drei)
+
+---
+
+## 📦 Full Source Code
 
 👉 Explore the complete code for this part on the [`part2` branch](https://github.com/myoxine/3d-profile/tree/part2).

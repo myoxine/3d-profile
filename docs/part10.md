@@ -251,7 +251,7 @@ Thanks for following along — go put your room on a diet, *carefully*. ⚡
 
 ---
 
-### Asset Credits
+## Asset Credits
 
 - Geometry compression — [glTF-Transform](https://gltf-transform.dev/) · [Draco](https://github.com/google/draco)
 - HDRI resize — [OpenCV](https://opencv.org/) · original HDRI from [Poly Haven](https://polyhaven.com/)

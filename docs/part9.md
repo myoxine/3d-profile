@@ -374,7 +374,7 @@ Thanks for following along — go make your room *talk back*. 🖥️
 
 ---
 
-### Asset Credits
+## Asset Credits
 
 - Avatars — [Ready Player Me](https://readyplayer.me/)
 - DOM-in-3D — `<Html>` from [@react-three/drei](https://github.com/pmndrs/drei)

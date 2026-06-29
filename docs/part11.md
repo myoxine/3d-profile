@@ -181,7 +181,7 @@ Thanks for following along — go shrink your room to pocket size. 📱
 
 ---
 
-### Asset Credits
+## Asset Credits
 
 - Camera controls — [`camera-controls`](https://github.com/yomotsu/camera-controls) via [@react-three/drei](https://github.com/pmndrs/drei)
 - Responsive signal — the platform's own [`window.matchMedia`](https://developer.mozilla.org/docs/Web/API/Window/matchMedia)

@@ -343,17 +343,17 @@ export default function App() {
 
 ---
 
-## ✨ What You've Built
+## Lessons Learned in Part 3
 
-- ✅ A stylish 3D room with real furniture
-- ✅ A gaming chair rocking gently left and right
-- ✅ A cozy virtual workspace perfect for your portfolio
-
-Your 3D website is no longer just a white box — it's transforming into your own personal space.
+- **`gltfjsx` turns a `.glb` into a typed React component** — meshes, materials, and transforms preserved, ready to drop into the scene.
+- **Downloaded models come at wild scales.** Expect to divide by hundreds (our chair was ~575×) — normalize with a single `scale` factor instead of guessing.
+- **A sine wave beats an endless spin.** `Math.sin(time * speed) * maxAngle` rocks an object back and forth; `speed` and `maxAngle` are your whole animation API. (In the final project we leave it static — see the evolution note above.)
+- **`<Suspense fallback={<Loader />}>` prevents the blank-screen wait** while heavy GLBs stream in.
+- Your 3D website is no longer just a white box — it's transforming into your own personal space.
 
 ---
 
-## 🚀 Next Up… (Part 4)
+## What's Next (Part 4)
 
 In the next part, we'll make the room feel like a real architectural space:
 
@@ -363,6 +363,14 @@ In the next part, we'll make the room feel like a real architectural space:
 - ☀️ A **directional light** that casts believable shadows
 
 Your 3D profile website is getting closer to becoming a fully immersive experience!
+
+---
+
+## Asset Credits
+
+- **Adjustable Desk** — [Poly Pizza](https://poly.pizza/) (free)
+- **Gaming Chair** — [Free3D](https://free3d.com/) (free)
+- Model-to-component pipeline — [gltfjsx](https://github.com/pmndrs/gltfjsx)
 
 ---
 

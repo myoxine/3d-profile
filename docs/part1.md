@@ -6,16 +6,22 @@ In this first part, we're going to create the foundation of your very own intera
 
 Whether you're new to 3D or just want to build a portfolio that actually feels alive, you're in the right place.
 
-## What We'll Do in This Part:
+In this first part, we'll:
 
-- Set up a Vite + React + TypeScript project
-- Install and configure React Three Fiber and Drei
-- Create a basic 3D room (floor, walls, box)
-- Enable orbit camera controls
+- ✅ Set up a Vite + React + TypeScript project
+- ✅ Install and configure React Three Fiber and Drei
+- ✅ Create a basic 3D room (floor, walls, box)
+- ✅ Enable orbit camera controls
 
 ---
 
-## Step 1: Project Setup
+## Why Start With a Simple Room
+
+Before furniture, lighting moods, and clickable interactivity, you need a stage to put them on. A 3D scene is just a few core pieces — a **canvas**, some **lights**, a **camera**, and **meshes** — and the fastest way to understand how they fit together is to build the smallest possible room and orbit around it. Everything in the next twelve parts hangs off this foundation, so we keep it deliberately minimal: get the loop running, see a box cast a shadow, and you're ready to grow it.
+
+---
+
+## Step 1 — Project Setup
 
 Let's create a new Vite project using the React + TypeScript template.
 
@@ -43,7 +49,7 @@ Head over to http://localhost:5173 — your app is live.
 
 ---
 
-## Step 2: Create a 3D Scene with React Three Fiber
+## Step 2 — Create a 3D Scene with React Three Fiber
 
 Let's clean up the homepage and drop in a 3D canvas. Let's update our `App.tsx` to show a simple 3D canvas with some lights and camera controls:
 
@@ -68,7 +74,7 @@ This gives you a 3D canvas with basic lighting and interactive orbit controls.
 
 ---
 
-## Step 3: Add Simple Lighting
+## Step 3 — Add Simple Lighting
 
 Lighting is one of the most important parts of 3D scenes — it helps define shape, depth, and atmosphere.
 
@@ -94,7 +100,7 @@ These two combined give a nice soft light setup, perfect for previewing objects 
 
 ---
 
-## Step 4: Build a Simple Room
+## Step 4 — Build a Simple Room
 
 Now let's create a minimal room — just a floor, some walls, and a box that will later become furniture, a desk, or whatever you want it to be!
 
@@ -161,7 +167,7 @@ export default function App() {
 
 ---
 
-## Step 5: Add Lighting with Shadows
+## Step 5 — Add Lighting with Shadows
 
 So far, we've added some simple lighting. But to make your scene look realistic, you also need **shadows**.
 
@@ -224,19 +230,17 @@ Objects that should show shadows falling onto them need `receiveShadow`:
 
 ---
 
-## What You Have Now
+## Lessons Learned in Part 1
 
-You now have a fully interactive 3D scene that includes:
-
-- ✅ A basic room layout with floor and walls
-- ✅ A floating box in the center (which could become furniture or decor)
-- ✅ Simple lighting and orbit controls so you can explore your scene
-
-It might look simple right now — but this is the canvas for your future 3D profile website!
+- **A 3D scene is four pieces.** A `<Canvas>`, lights, a camera, and meshes — once those click into place, everything else is composition.
+- **`<Canvas shadows>` is opt-in, and so is every shadow.** The renderer, each light (`castShadow`), and each mesh (`castShadow` / `receiveShadow`) must all agree before a shadow appears.
+- **Two lights go a long way.** A soft `ambientLight` keeps nothing pure-black; a `directionalLight` gives shape and a sun-like shadow.
+- **`OrbitControls` is the fastest way to *see* your scene** while you build — we'll trade it for animated camera moves much later (Part 8).
+- It looks simple now, but this minimal room is the canvas for your future 3D profile website.
 
 ---
 
-## 🚀 What's Next (Part 2)
+## What's Next (Part 2)
 
 Right now everything is flat color and a floating box. In the next part we give the room some soul:
 
@@ -246,6 +250,13 @@ Right now everything is flat color and a floating box. In the next part we give 
 - 🛠️ Rebuilding the room out of reusable components
 
 Stay tuned — your cardboard box is about to become a real space!
+
+---
+
+## Asset Credits
+
+- No external assets yet — Part 1 is pure geometry and lights.
+- Built with [React Three Fiber](https://r3f.docs.pmnd.rs/), [drei](https://github.com/pmndrs/drei), and [Vite](https://vite.dev/).
 
 ---
 

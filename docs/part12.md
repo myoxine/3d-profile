@@ -14,6 +14,12 @@ None of this is hard. All of it matters. Let's finish strong.
 
 ---
 
+## Why Polish Matters
+
+The room already works — so why spend a whole part on sounds, easing curves, and 2-pixel hover lifts? Because *working* and *feeling finished* are different things. Polish is the layer a visitor never consciously notices but absolutely feels: a click that responds, a view that glides instead of snapping, a loading screen that looks designed. It's the difference between "a cool demo someone built" and "a product." None of it is technically hard; all of it is what makes the portfolio memorable.
+
+---
+
 ## Step 1 — Sound With No Sound Files
 
 Audio is the fastest way to make an interface feel *alive* — and the fastest way to bloat your bundle with megabytes of MP3s. We skip the files entirely: the **Web Audio API** can *synthesize* every UI sound from an oscillator and a gain envelope. A click is just a short tone with a fast attack and decay.
@@ -182,7 +188,7 @@ useFrame((_, dt) => {
 
 ---
 
-## The End — and What You've Built
+## What You've Built So Far
 
 Twelve parts ago this was an empty `<Canvas>`. Now it's a **navigable, interactive, fast, mobile-friendly, delightful 3D portfolio**: a room you can tour, a desktop you can click, a résumé you can read, tutorials you can open, lights you can flip — and now, one that *sounds* and *feels* like a finished product.
 
@@ -202,7 +208,7 @@ Put it behind a URL and let it speak for you — see you in the finale. 🏠✨
 
 ---
 
-### Asset Credits
+## Asset Credits
 
 - Sound — synthesized at runtime with the [Web Audio API](https://developer.mozilla.org/docs/Web/API/Web_Audio_API) (no files)
 - Loading progress — `useProgress` from [@react-three/drei](https://github.com/pmndrs/drei)
