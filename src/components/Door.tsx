@@ -6,7 +6,6 @@ import * as THREE from 'three'
 import type { JSX } from 'react'
 import { useGLTF } from '@react-three/drei'
 import type { GLTF } from 'three-stdlib'
-import { useLayoutEffect } from 'react'
 type GLTFResult = GLTF & {
   nodes: {
     Cube157: THREE.Mesh
@@ -21,36 +20,24 @@ type GLTFResult = GLTF & {
 }
 
 export function Model(props: JSX.IntrinsicElements['group']) {
-  const { nodes, materials,scene } = useGLTF('/models/uploads_files_3300784_Door1_001.glb') as unknown as GLTFResult
-  useLayoutEffect(() => {
-    if (scene) {
-      const box = new THREE.Box3().setFromObject(scene);
-      const size = new THREE.Vector3();
-      box.getSize(size);
-
-      console.log('Model Door Size:', size); // size will contain x, y, z dimensions
-    }
-  }, [scene]);
+  const { nodes } = useGLTF('/models/uploads_files_3300784_Door1_001.glb') as unknown as GLTFResult
+  // baseColorTexture bawaan pintu ("Douglas Fir white") tampak ber-anyam/grid
+  // pada skala UV ini (bukan efek kompresi — ada di asset aslinya). Ganti
+  // material panel pintu dengan warna solid bersih (seperti pintu dicat).
   return (
     <group {...props} dispose={null}>
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.Cube157.geometry}
-        material={materials.Door_colors}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.Cube157_1.geometry}
-        material={materials['Material.001']}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.Cube157_2.geometry}
-        material={materials.Hinge}
-      />
+      {/* panel pintu — warna solid bersih */}
+      <mesh castShadow receiveShadow geometry={nodes.Cube157.geometry}>
+        <meshStandardMaterial color="#d8d3c8" roughness={0.8} metalness={0} />
+      </mesh>
+      {/* HANDLE pintu — hitam metalik */}
+      <mesh castShadow receiveShadow geometry={nodes.Cube157_1.geometry}>
+        <meshStandardMaterial color="#141414" roughness={0.4} metalness={0.6} />
+      </mesh>
+      {/* ENGSEL pintu — hitam metalik */}
+      <mesh castShadow receiveShadow geometry={nodes.Cube157_2.geometry}>
+        <meshStandardMaterial color="#141414" roughness={0.4} metalness={0.6} />
+      </mesh>
     </group>
   )
 }

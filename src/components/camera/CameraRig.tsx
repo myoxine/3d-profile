@@ -48,6 +48,9 @@ export function CameraRig() {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const ref = useRef<any>(null)
   const view = useFocus((s) => s.view)
+  // homeKey dinaikkan tiap klik "Beranda"/reset -> paksa kamera kembali ke
+  // framing overview yang rapi (berguna jika user sudah memutar kamera).
+  const homeKey = useFocus((s) => s.homeKey)
 
   // sekali: kurung kamera di dalam ruangan
   useEffect(() => {
@@ -57,13 +60,29 @@ export function CameraRig() {
     c.boundaryEnclosesCamera = true
   }, [])
 
+  // CATATAN: FOV sengaja DIBIARKAN TETAP (60, diset di <Canvas>). Sempat dicoba
+  // FOV adaptif untuk portrait, tapi memperlebar FOV di ruangan sekecil ini
+  // menimbulkan distorsi fisheye (objek dekat membesar) DAN merusak kalibrasi
+  // layar monitor (Part 9) yang disetel pada FOV 60. Responsivitas ditangani di
+  // layer UI (menu) saja, bukan dengan mengubah lensa.
+
   useEffect(() => {
     const c = ref.current
     if (!c) return
     const v = VIEWS[view]
 
+    // Selalu bersihkan batas sudut (pernah dicoba lalu dibuang; instance
+    // CameraControls bisa menyimpan nilai lama saat hot-reload -> kamera
+    // terkunci menghadap arah yang salah). Pastikan rotasi selalu bebas.
+    c.minAzimuthAngle = -Infinity
+    c.maxAzimuthAngle = Infinity
+    c.minPolarAngle = 0
+    c.maxPolarAngle = Math.PI
+
     if (view === 'overview') {
-      // overview: boleh diputar + sedikit zoom (dibatasi maxDistance)
+      // overview: boleh diputar bebas + sedikit zoom (dibatasi maxDistance &
+      // boundary supaya tetap di dalam ruangan). Klik "Beranda" me-reset
+      // framing via homeKey kalau kamera sempat diputar ke sudut aneh.
       c.minDistance = OVERVIEW_MIN
       c.maxDistance = OVERVIEW_MAX
       c.enabled = true
@@ -77,7 +96,7 @@ export function CameraRig() {
     }
 
     c.setLookAt(v.pos[0], v.pos[1], v.pos[2], v.target[0], v.target[1], v.target[2], true)
-  }, [view])
+  }, [view, homeKey])
 
   return <CameraControls ref={ref} makeDefault minDistance={OVERVIEW_MIN} maxDistance={OVERVIEW_MAX} />
 }

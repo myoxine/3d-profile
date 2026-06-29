@@ -10,6 +10,7 @@ import { useEffect, useMemo, useRef } from 'react'
 import type { JSX } from 'react'
 import { useGraph } from '@react-three/fiber'
 import { useGLTF, useAnimations } from '@react-three/drei'
+import { stripMorphTracks } from '../utils/cleanAnimations'
 import { SkeletonUtils } from 'three-stdlib'
 import type { GLTF } from 'three-stdlib'
 
@@ -44,7 +45,8 @@ export function Model(props: JSX.IntrinsicElements['group']) {
   const { scene, animations } = useGLTF('/models/woman.glb')
   const clone = useMemo(() => SkeletonUtils.clone(scene), [scene])
   const { nodes, materials } = useGraph(clone) as unknown as GLTFResult
-  const { actions } = useAnimations(animations, group)
+  const cleanAnims = useMemo(() => stripMorphTracks(animations), [animations])
+  const { actions } = useAnimations(cleanAnims, group)
 
   useEffect(() => {
     const action = actions['mixamo.com']

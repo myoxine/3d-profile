@@ -7,7 +7,7 @@ import * as THREE from 'three'
 import type { JSX } from 'react'
 import { useGLTF } from '@react-three/drei'
 import type { GLTF } from 'three-stdlib'
-import { useLayoutEffect,useRef } from 'react'
+import { useRef } from 'react'
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -62,17 +62,8 @@ type GLTFResult = GLTF & {
 }
 
 export function Model(props: JSX.IntrinsicElements['group']) {
-  const { nodes, materials, scene } = useGLTF('/models/gaming chair.glb') as unknown as GLTFResult
+  const { nodes, materials } = useGLTF('/models/gaming chair.glb') as unknown as GLTFResult
   const ref = useRef<THREE.Group>(null)
-  useLayoutEffect(() => {
-    if (scene) {
-      const box = new THREE.Box3().setFromObject(scene);
-      const size = new THREE.Vector3();
-      box.getSize(size);
-
-      console.log('Model Size:', size); // size will contain x, y, z dimensions
-    }
-  }, [scene]);
 
   // useFrame((state, delta) => {
   //   if (ref.current && ref.current.rotation) {

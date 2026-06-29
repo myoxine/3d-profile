@@ -34,8 +34,10 @@ function getSystemTimeOfDay(): TimeOfDay {
 const LightingContext = createContext<LightingState | null>(null)
 
 export function LightingProvider({ children }: { children: ReactNode }) {
-  // Default: semua lampu mati (off)
-  const [ceilingOn, setCeiling] = useState(false)
+  // Saat dark mode (malam), default-nya lampu PLAFON menyala supaya ruangan
+  // tidak gelap; lampu lain tetap mati.
+  const startNight = getSystemTimeOfDay() === 'night'
+  const [ceilingOn, setCeiling] = useState(startNight)
   const [standingOn, setStanding] = useState(false)
   const [tableOn, setTable] = useState(false)
   const [sofaOn, setSofa] = useState(false)
@@ -47,8 +49,11 @@ export function LightingProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     if (typeof window === 'undefined' || !window.matchMedia) return
     const mq = window.matchMedia(DARK_MODE_QUERY)
-    const handler = (e: MediaQueryListEvent) =>
+    const handler = (e: MediaQueryListEvent) => {
       setTimeOfDay(e.matches ? 'night' : 'day')
+      // ganti ke malam -> nyalakan plafon; ke siang -> matikan (default sesuai mode)
+      setCeiling(e.matches)
+    }
     mq.addEventListener('change', handler)
     return () => mq.removeEventListener('change', handler)
   }, [])

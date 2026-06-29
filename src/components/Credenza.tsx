@@ -18,14 +18,14 @@ type GLTFResult = GLTF & {
 
 export function Model(props: JSX.IntrinsicElements['group']) {
   const { nodes, materials } = useGLTF('/models/credenza.glb') as unknown as GLTFResult
+  // Material asli punya normal map "cane/rattan" yang bikin permukaan tampak
+  // ber-anyam kasar. Pakai material baru: pertahankan warna baseColor, BUANG
+  // normal map -> permukaan halus tapi warna/panel tetap.
   return (
     <group {...props} dispose={null}>
-      <mesh
-        geometry={nodes.accent_cabinet_pfo_bsw.geometry}
-        material={materials.accent_cabinet_Mat}
-        castShadow
-        receiveShadow
-      />
+      <mesh geometry={nodes.accent_cabinet_pfo_bsw.geometry} castShadow receiveShadow>
+        <meshStandardMaterial map={materials.accent_cabinet_Mat.map} roughness={0.85} metalness={0} />
+      </mesh>
     </group>
   )
 }

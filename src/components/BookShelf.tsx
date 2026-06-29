@@ -71,8 +71,9 @@ function SeriesTag({ name, color }: { name: string; color: string }) {
       <RoundedBox args={[CELL_W * 0.96, 0.07, 0.014]} radius={0.008} smoothness={3} castShadow>
         <meshStandardMaterial color={color} roughness={0.4} metalness={0.2} />
       </RoundedBox>
-      <Text position={[0, 0, 0.009]} fontSize={0.034} maxWidth={CELL_W * 0.9} color="#ffffff" anchorX="center" anchorY="middle" textAlign="center">
+      <Text position={[0, 0, 0.009]} fontSize={0.034} maxWidth={CELL_W * 0.9} anchorX="center" anchorY="middle" textAlign="center">
         {name}
+        <meshStandardMaterial color="#ffffff" roughness={1} metalness={0} />
       </Text>
     </group>
   )
@@ -123,12 +124,14 @@ function CellBooks({ articles, color }: { articles: Article[]; color: string }) 
               maxWidth={BOOK_H * 0.92}
               lineHeight={1}
               textAlign="center"
-              color="#f5f5f5"
               anchorX="center"
               anchorY="middle"
               onClick={open}
             >
               {a.title}
+              {/* material BER-CAHAYA (bukan unlit default troika) supaya teks
+                  ikut gelap saat lampu dimatikan, tidak "menyala" di dark mode */}
+              <meshStandardMaterial color="#f5f5f5" roughness={1} metalness={0} />
             </Text>
             {active && hover === i && (
               <Html

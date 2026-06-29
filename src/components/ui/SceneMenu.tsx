@@ -8,6 +8,7 @@ import type { CSSProperties, ReactNode } from 'react'
 import { useFocus, type ViewName } from '../../store/useFocus'
 import { openLink } from '../../config/links'
 import { TUTORIALS } from '../../config/tutorials'
+import { useIsMobile } from '../../hooks/useMediaQuery'
 
 const NAV: { view: ViewName; label: string; icon: string }[] = [
   { view: 'overview', label: 'Beranda', icon: '🏠' },
@@ -98,6 +99,7 @@ export function SceneMenu() {
   const stopTour = useFocus((s) => s.stopTour)
   const reset = useFocus((s) => s.reset)
 
+  const isMobile = useIsMobile()
   const focused = view !== 'overview'
   const [step, setStep] = useState(0)
   const [remaining, setRemaining] = useState(0) // detik tersisa sebelum auto-next
@@ -129,7 +131,11 @@ export function SceneMenu() {
 
   const onNav = (v: ViewName) => {
     if (touring) stopTour()
-    setView(v)
+    // klik "Beranda" -> reset() agar kamera selalu kembali ke framing overview
+    // yang rapi (homeKey naik), bahkan saat view sudah 'overview' tapi terlanjur
+    // diputar. View lain cukup setView biasa.
+    if (v === 'overview') reset()
+    else setView(v)
   }
 
   return (
@@ -215,19 +221,23 @@ export function SceneMenu() {
         </div>
       )}
 
-      {/* Bar menu bawah-tengah */}
+      {/* Bar menu bawah-tengah. Di mobile: ikon-saja + bisa di-scroll horizontal
+          supaya 6 menu tetap muat di layar sempit tanpa menyusut/menumpuk. */}
       <nav
         style={{
           position: 'absolute',
-          bottom: 18,
+          bottom: isMobile ? 12 : 18,
           left: '50%',
           transform: 'translateX(-50%)',
           display: 'flex',
           flexWrap: 'nowrap',
-          justifyContent: 'center',
+          justifyContent: isMobile ? 'flex-start' : 'center',
           gap: 6,
           padding: 6,
-          maxWidth: '98vw',
+          maxWidth: '96vw',
+          overflowX: 'auto',
+          WebkitOverflowScrolling: 'touch',
+          scrollbarWidth: 'none',
           borderRadius: 999,
           background: 'rgba(20,20,24,0.55)',
           backdropFilter: 'blur(8px)',
@@ -242,14 +252,17 @@ export function SceneMenu() {
             <button
               key={n.view}
               onClick={() => onNav(n.view)}
+              title={n.label}
+              aria-label={n.label}
               style={{
                 display: 'flex',
                 alignItems: 'center',
-                gap: 7,
+                gap: isMobile ? 0 : 7,
                 whiteSpace: 'nowrap',
+                flex: 'none',
                 border: 'none',
                 cursor: 'pointer',
-                padding: '9px 16px',
+                padding: isMobile ? '10px 12px' : '9px 16px',
                 borderRadius: 999,
                 fontSize: 13,
                 fontWeight: 600,
@@ -260,8 +273,8 @@ export function SceneMenu() {
                 transition: 'background 0.2s, color 0.2s',
               }}
             >
-              <span style={{ fontSize: 15, lineHeight: 1 }}>{n.icon}</span>
-              {n.label}
+              <span style={{ fontSize: isMobile ? 18 : 15, lineHeight: 1 }}>{n.icon}</span>
+              {!isMobile && n.label}
             </button>
           )
         })}
