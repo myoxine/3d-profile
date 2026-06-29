@@ -234,4 +234,8 @@ You now have a fully interactive 3D scene that includes:
 
 It might look simple right now — but this is the canvas for your future 3D profile website!
 
-Want to try this yourself or explore the code in detail?
+---
+
+## 📦 Full Source Code
+
+👉 Explore the complete code for this part on the [`part1` branch](https://github.com/myoxine/3d-profile/tree/part1).

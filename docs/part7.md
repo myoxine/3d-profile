@@ -268,3 +268,9 @@ Thanks for following the series — go make your room *yours*. 🎬
 - Wall clock, lamp — free GLB/glTF assets (see each model's source license)
 - Typeface — `helvetiker_regular` from the [three.js](https://github.com/mrdoob/three.js) examples
 - Post-processing — [@react-three/postprocessing](https://github.com/pmndrs/react-postprocessing) (Bloom)
+
+---
+
+## 📦 Full Source Code
+
+👉 Explore the complete code for this part on the [`part7` branch](https://github.com/myoxine/3d-profile/tree/part7).

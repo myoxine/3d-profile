@@ -185,3 +185,9 @@ Thanks for following along — go shrink your room to pocket size. 📱
 
 - Camera controls — [`camera-controls`](https://github.com/yomotsu/camera-controls) via [@react-three/drei](https://github.com/pmndrs/drei)
 - Responsive signal — the platform's own [`window.matchMedia`](https://developer.mozilla.org/docs/Web/API/Window/matchMedia)
+
+---
+
+## 📦 Full Source Code
+
+👉 Explore the complete code for this part on the [`part11` branch](https://github.com/myoxine/3d-profile/tree/part11).

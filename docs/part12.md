@@ -195,3 +195,9 @@ Everything except the final mile — **deployment** — is done. Put it behind a
 - Sound — synthesized at runtime with the [Web Audio API](https://developer.mozilla.org/docs/Web/API/Web_Audio_API) (no files)
 - Loading progress — `useProgress` from [@react-three/drei](https://github.com/pmndrs/drei)
 - State — [zustand](https://github.com/pmndrs/zustand)
+
+---
+
+## 📦 Full Source Code
+
+👉 Explore the complete code for this part on the [`part12` branch](https://github.com/myoxine/3d-profile/tree/part12).

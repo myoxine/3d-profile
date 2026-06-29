@@ -429,4 +429,4 @@ Stay tuned — your 3D profile is about to come to life!
 
 Want to explore the full working project or customize it yourself?
 
-👉 Check out the source code on GitHub: https://github.com/myoxine/3d-profile/tree/part2
+👉 Explore the complete code for this part on the [`part2` branch](https://github.com/myoxine/3d-profile/tree/part2).

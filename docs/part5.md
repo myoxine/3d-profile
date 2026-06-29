@@ -426,7 +426,9 @@ Your 3D profile website is well on its way to becoming a stunning interactive po
 
 ## 📦 Full Source Code
 
-👉 The `part5` branch contains everything from this tutorial:
+👉 Explore the complete code for this part on the [`part5` branch](https://github.com/myoxine/3d-profile/tree/part5).
+
+The `part5` branch contains everything from this tutorial:
 - The `LightingContext` + day/night logic
 - Interactive `LightSwitch`, the LED `Ceiling`, `StandingLamp`, and `TableLamp`
 - Bloom setup and all the new furniture

@@ -367,6 +367,4 @@ Your 3D profile website is getting closer to becoming a fully immersive experien
 
 ## 📦 Full Source Code
 
-👉 Check out the full project here: https://github.com/myoxine/3d-profile/tree/part3
-
-See the `part3` branch for the latest code.
+👉 Explore the complete code for this part on the [`part3` branch](https://github.com/myoxine/3d-profile/tree/part3).

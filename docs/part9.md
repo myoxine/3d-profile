@@ -380,3 +380,9 @@ Thanks for following along — go make your room *talk back*. 🖥️
 - DOM-in-3D — `<Html>` from [@react-three/drei](https://github.com/pmndrs/drei)
 - State — [zustand](https://github.com/pmndrs/zustand)
 - Project & experience content — from the author's CV
+
+---
+
+## 📦 Full Source Code
+
+👉 Explore the complete code for this part on the [`part9` branch](https://github.com/myoxine/3d-profile/tree/part9).

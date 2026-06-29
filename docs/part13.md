@@ -228,3 +228,9 @@ That's the series. From a black screen to a room with the lights on, behind a do
 - OG image — generated as a 1200×630 card (gradient + gold title)
 - Icons & favicon — custom "H" monogram (SVG + PNG)
 - SEO testing — [Facebook Sharing Debugger](https://developers.facebook.com/tools/debug/), [opengraph.xyz](https://www.opengraph.xyz/)
+
+---
+
+## 📦 Full Source Code
+
+👉 Explore the complete code for this part on the [`part13` branch](https://github.com/myoxine/3d-profile/tree/part13).

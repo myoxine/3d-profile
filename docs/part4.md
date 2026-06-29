@@ -388,7 +388,7 @@ Your 3D profile website is on its way to becoming a stunning interactive portfol
 
 ## 📦 Full Source Code
 
-👉 Check out the full project here: https://github.com/myoxine/3d-profile/tree/part4
+👉 Explore the complete code for this part on the [`part4` branch](https://github.com/myoxine/3d-profile/tree/part4).
 
 The `part4` branch contains:
 

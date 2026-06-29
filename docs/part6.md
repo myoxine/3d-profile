@@ -268,4 +268,6 @@ The room is furnished and personal — next we make it *navigable*.
 
 ## 📦 Full Source Code
 
-👉 The `part6` branch contains everything: the `Laptop`, `Monitor`, and `Tv` components, the reusable `PhotoFrame`, the gallery layout, and the PDF/image pipeline.
+👉 Explore the complete code for this part on the [`part6` branch](https://github.com/myoxine/3d-profile/tree/part6).
+
+The `part6` branch contains everything: the `Laptop`, `Monitor`, and `Tv` components, the reusable `PhotoFrame`, the gallery layout, and the PDF/image pipeline.

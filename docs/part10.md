@@ -256,3 +256,9 @@ Thanks for following along — go put your room on a diet, *carefully*. ⚡
 - Geometry compression — [glTF-Transform](https://gltf-transform.dev/) · [Draco](https://github.com/google/draco)
 - HDRI resize — [OpenCV](https://opencv.org/) · original HDRI from [Poly Haven](https://polyhaven.com/)
 - Avatars — [Ready Player Me](https://readyplayer.me/)
+
+---
+
+## 📦 Full Source Code
+
+👉 Explore the complete code for this part on the [`part10` branch](https://github.com/myoxine/3d-profile/tree/part10).

@@ -340,3 +340,9 @@ Thanks for following along — go make your room *navigable*. 🎥
 - Brand logos — official SVG paths (each brand's trademark belongs to its owner; used here as link affordances)
 - Camera controls — [`camera-controls`](https://github.com/yomotsu/camera-controls) via [@react-three/drei](https://github.com/pmndrs/drei)
 - State — [zustand](https://github.com/pmndrs/zustand)
+
+---
+
+## 📦 Full Source Code
+
+👉 Explore the complete code for this part on the [`part8` branch](https://github.com/myoxine/3d-profile/tree/part8).
