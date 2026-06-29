@@ -268,7 +268,7 @@ Lessons Learned in Part 9
 
 —  —  —
 
-What’s Next
+What’s Next (Part 10)
 
 The room is now genuinely interactive: a desktop you can click, a resume you can read, tooltips that teach, a guided tour, and links you can share. From here the series can turn outward — performance budgets (draco/meshopt compression, instancing, on-demand frames), mobile controls & layout, and finally deploying the whole thing so recruiters can walk through your portfolio from a single link.
 

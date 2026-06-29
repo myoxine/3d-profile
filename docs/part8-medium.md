@@ -228,7 +228,7 @@ Lessons Learned in Part 8
 
 —  —  —
 
-What’s Next
+What’s Next (Part 9)
 
 The room is now a guided portfolio: a menu tours every area, objects are clickable, and the camera always behaves. Next we can flesh out the book & project drawers (a side panel listing each series’ articles, app-style project icons), add deep links (open straight into a view via the URL hash), and lazy-load the heavy GLBs so the first paint is instant.
 
