@@ -236,6 +236,19 @@ It might look simple right now — but this is the canvas for your future 3D pro
 
 ---
 
+## 🚀 What's Next (Part 2)
+
+Right now everything is flat color and a floating box. In the next part we give the room some soul:
+
+- 🪵 **Realistic textures** on the floor and walls (color, roughness, normal, AO maps)
+- 🧱 **Walls with holes** for windows and doors, built with `ExtrudeGeometry`
+- 🪟 A **reflective glass window** with a frame
+- 🛠️ Rebuilding the room out of reusable components
+
+Stay tuned — your cardboard box is about to become a real space!
+
+---
+
 ## 📦 Full Source Code
 
 👉 Explore the complete code for this part on the [`part1` branch](https://github.com/myoxine/3d-profile/tree/part1).

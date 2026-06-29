@@ -411,14 +411,14 @@ All 3D assets below are free models — please check each asset's license before
 
 ---
 
-## Coming Up Next…
+## Coming Up Next… (Part 6)
 
-In the next part we'll keep pushing the interactivity:
+The room is interactive — next we make it **personal**, filling it with *your* content:
 
-- Clickable objects that reveal info (projects, about, contact)
-- Smooth camera transitions to focus on areas of the room
-- Sound effects for a multi-sensory feel
-- Saving the user's light preferences
+- 💻 A **laptop and a monitor** on the desk
+- 📺 A **TV you can click to play a YouTube video** right on the screen
+- 🖼️ A reusable **PhotoFrame** component and a **gallery wall** of your photo, diplomas, and certificates
+- 📄 A practical workflow to turn **PDFs and images into web-ready textures**
 
 Your 3D profile website is well on its way to becoming a stunning interactive portfolio!
 

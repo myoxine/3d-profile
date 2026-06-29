@@ -1,6 +1,6 @@
 # 3D Profile Website - Part 12: Make It Delightful — Procedural Audio, a Real Loading Screen & Micro-Interactions
 
-Welcome back — and this is the **finale** of the 3D Profile Website series!
+Welcome back — and this is the **last build part** of the 3D Profile Website series! (One short part remains after this: shipping it online.)
 
 The room is fast (Part 10), works on a phone (Part 11), and every model is intact. What's left is the layer that separates "a demo" from "a *product*": the little touches you don't consciously notice but absolutely feel. In **Part 12** we add the polish:
 
@@ -186,7 +186,19 @@ useFrame((_, dt) => {
 
 Twelve parts ago this was an empty `<Canvas>`. Now it's a **navigable, interactive, fast, mobile-friendly, delightful 3D portfolio**: a room you can tour, a desktop you can click, a résumé you can read, tutorials you can open, lights you can flip — and now, one that *sounds* and *feels* like a finished product.
 
-Everything except the final mile — **deployment** — is done. Put it behind a URL and let it speak for you. Thanks for building the whole thing alongside me. 🏠✨
+Everything except the final mile — **deployment** — is done. That's exactly what we tackle next.
+
+---
+
+## What's Next (Part 13)
+
+The room looks, works, sounds, and feels finished. All that's left is to put it **online** — the focus of **Part 13**:
+
+- 📦 A **production build** and deploying the static SPA (to Vercel)
+- ⚡ **Cache headers** so the 40 MB of 3D assets load instantly on return visits
+- 🔎 **SEO & social meta** — Open Graph, Twitter Card, a real 1200×630 share image, favicon, and a web manifest
+
+Put it behind a URL and let it speak for you — see you in the finale. 🏠✨
 
 ---
 

@@ -256,13 +256,15 @@ Your room is now unmistakably **yours**.
 
 ---
 
-## Coming Up Next…
+## Coming Up Next… (Part 7)
 
-- Clickable hotspots that focus the camera and reveal info panels (projects, about, contact)
-- A guided tour and smooth camera transitions
-- Deploying your 3D portfolio online
+The room is furnished and personal — but it's empty of people and frozen in time. Next we **bring it to life**:
 
-The room is furnished and personal — next we make it *navigable*.
+- 🧍 **Animated characters** from Mixamo (someone typing at the desk, people on the sofa)
+- 🧑‍🎨 A drop-in pipeline for **Ready Player Me avatars** (real textures, real eyes)
+- 🕐 A **wall clock whose hands track your real system time**
+- ✨ A glowing **neon sign** built from extruded 3D letters + Bloom
+- 💡 Two **lamps behind the sofa** wired to a new **4th light switch**
 
 ---
 

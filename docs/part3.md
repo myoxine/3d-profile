@@ -353,13 +353,14 @@ Your 3D website is no longer just a white box — it's transforming into your ow
 
 ---
 
-## 🚀 Next Up…
+## 🚀 Next Up… (Part 4)
 
-In the next part, we'll:
+In the next part, we'll make the room feel like a real architectural space:
 
-- Explore lighting moods for different atmospheres
-- Add environment maps for ultra-realistic reflections
-- Make objects clickable for interactivity
+- 🚪 A realistic **3D door** with frame, handle, and hinges
+- 🧱 A **ceiling** to fully enclose the room
+- 🌅 **HDRI environment lighting** for ultra-realistic reflections and global illumination
+- ☀️ A **directional light** that casts believable shadows
 
 Your 3D profile website is getting closer to becoming a fully immersive experience!
 

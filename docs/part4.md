@@ -371,9 +371,9 @@ Your 3D website is evolving from a collection of models into a real virtual spac
 
 ---
 
-## Coming Up Next…
+## Coming Up Next… (Part 5)
 
-In the next part (Part 5), we'll make the room **interactive and atmospheric**:
+In the next part we'll make the room **interactive and atmospheric**:
 
 - A central lighting "brain" any component can read and control
 - **Clickable 3D light switches** that physically flip

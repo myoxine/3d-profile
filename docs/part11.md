@@ -173,7 +173,7 @@ Good news: almost nothing to do. drei's **`CameraControls` is touch-native** —
 
 ---
 
-## What's Next
+## What's Next (Part 12)
 
 The portfolio now adapts from desktop to a phone in portrait: it renders within budget, frames correctly, and the menu fits a thumb. That leaves the fun finishing touches for **Part 12 — Audio & Polish**: ambient room tone and click SFX, smoother camera easing, a friendlier loading screen, and a few small delights. After that, it's a portfolio you can confidently drop into a résumé link.
 

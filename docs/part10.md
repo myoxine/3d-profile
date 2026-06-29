@@ -243,7 +243,7 @@ Could we go smaller? Yes — meshopt or aggressive Draco would get the avatars t
 
 ---
 
-## What's Next
+## What's Next (Part 11)
 
 The portfolio is now a quarter of its weight and every model is intact. That sets up **Part 11 — Mobile & Responsive**: touch controls, a menu that reflows on small screens, and a quality tier for weaker GPUs. After that, **Part 12 — Audio & Polish**.
 
