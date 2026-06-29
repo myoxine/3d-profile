@@ -72,6 +72,8 @@ export default function App() {
 
 This gives you a 3D canvas with basic lighting and interactive orbit controls.
 
+> 💡 **Everything inside `<Canvas>` is a Three.js object described as JSX.** `<mesh>`, `<ambientLight>`, `<OrbitControls>` — React Three Fiber turns each tag into the matching Three.js class, so you compose a 3D scene the same way you compose a UI.
+
 ---
 
 ## Step 3 — Add Simple Lighting
@@ -174,6 +176,8 @@ So far, we've added some simple lighting. But to make your scene look realistic,
 Shadows are what give your 3D objects a sense of depth and weight. Without them, everything looks like it's floating in space!
 
 Here's how to add lighting with shadows in React Three Fiber.
+
+> ⚠️ **Shadows are opt-in three times.** Nothing casts a shadow until the canvas (`shadows`), the light (`castShadow`), *and* the mesh (`castShadow` / `receiveShadow`) all agree. Miss any one and you'll wonder why the floor stays flat.
 
 ### 1. Enable Shadows in the Canvas
 
