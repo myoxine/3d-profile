@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Aplikasi ini SPA dengan hash-routing (#home, #experience, ...). Mesin
      pencari mengabaikan fragmen hash, jadi hanya ada satu URL kanonik: root. -->
-<urlset xmlns="http://www.sitemap.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://hadi-3d-profile.vercel.app/</loc>
     <changefreq>monthly</changefreq>
