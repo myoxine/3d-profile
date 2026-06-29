@@ -98,5 +98,16 @@ export function CameraRig() {
     c.setLookAt(v.pos[0], v.pos[1], v.pos[2], v.target[0], v.target[1], v.target[2], true)
   }, [view, homeKey])
 
-  return <CameraControls ref={ref} makeDefault minDistance={OVERVIEW_MIN} maxDistance={OVERVIEW_MAX} />
+  // smoothTime lebih besar = perpindahan view terasa sinematik (easing halus);
+  // draggingSmoothTime tetap kecil supaya rotasi manual tetap responsif.
+  return (
+    <CameraControls
+      ref={ref}
+      makeDefault
+      smoothTime={0.5}
+      draggingSmoothTime={0.12}
+      minDistance={OVERVIEW_MIN}
+      maxDistance={OVERVIEW_MAX}
+    />
+  )
 }

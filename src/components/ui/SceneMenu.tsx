@@ -9,6 +9,8 @@ import { useFocus, type ViewName } from '../../store/useFocus'
 import { openLink } from '../../config/links'
 import { TUTORIALS } from '../../config/tutorials'
 import { useIsMobile } from '../../hooks/useMediaQuery'
+import { useAudio } from '../../store/useAudio'
+import { sfx, primeAudio } from '../../audio/sound'
 
 const NAV: { view: ViewName; label: string; icon: string }[] = [
   { view: 'overview', label: 'Beranda', icon: '🏠' },
@@ -98,6 +100,8 @@ export function SceneMenu() {
   const startTour = useFocus((s) => s.startTour)
   const stopTour = useFocus((s) => s.stopTour)
   const reset = useFocus((s) => s.reset)
+  const muted = useAudio((s) => s.muted)
+  const toggleMute = useAudio((s) => s.toggleMute)
 
   const isMobile = useIsMobile()
   const focused = view !== 'overview'
@@ -126,10 +130,18 @@ export function SceneMenu() {
     }
   }, [touring, step, setView, reset])
 
-  const tourNext = () => (step + 1 >= TOUR.length ? reset() : setStep(step + 1))
-  const tourPrev = () => setStep((s) => Math.max(0, s - 1))
+  const tourNext = () => {
+    sfx.click()
+    step + 1 >= TOUR.length ? reset() : setStep(step + 1)
+  }
+  const tourPrev = () => {
+    sfx.click()
+    setStep((s) => Math.max(0, s - 1))
+  }
 
   const onNav = (v: ViewName) => {
+    primeAudio() // hangatkan AudioContext pada interaksi pertama
+    sfx.whoosh() // bunyi kamera terbang ke area
     if (touring) stopTour()
     // klik "Beranda" -> reset() agar kamera selalu kembali ke framing overview
     // yang rapi (homeKey naik), bahkan saat view sudah 'overview' tapi terlanjur
@@ -142,23 +154,50 @@ export function SceneMenu() {
     <>
       {/* Kontrol kiri-atas: Tour */}
       {!focused && !touring && (
-        <button onClick={() => startTour()} style={pill('#7c5cff')}>
+        <button onClick={() => { primeAudio(); sfx.open(); startTour() }} style={pill('#7c5cff')}>
           ▶ Tur Ruangan
         </button>
       )}
 
-      {/* Kontrol kanan-atas: Stop tour / Keluar */}
-      {touring ? (
-        <button onClick={() => reset()} style={{ ...pill('#ff6b6b'), left: 'auto', right: 18 }}>
-          ⏹ Hentikan Tur
-        </button>
-      ) : (
-        focused && (
-          <button onClick={() => reset()} style={{ ...pill('#ffd27a'), left: 'auto', right: 18, color: '#1a1a1a' }}>
+      {/* Kontrol kanan-atas: [Stop/Keluar] + [mute] SEJAJAR dalam satu baris */}
+      <div style={{ position: 'absolute', top: 18, right: 18, zIndex: 12, display: 'flex', alignItems: 'center', gap: 10 }}>
+        {touring && (
+          <button onClick={() => { sfx.close(); reset() }} style={{ ...pill('#ff6b6b'), position: 'static', top: undefined, left: undefined }}>
+            ⏹ Hentikan Tur
+          </button>
+        )}
+        {focused && !touring && (
+          <button onClick={() => { sfx.close(); reset() }} style={{ ...pill('#ffd27a'), position: 'static', top: undefined, left: undefined, color: '#1a1a1a' }}>
             ✕ Keluar
           </button>
-        )
-      )}
+        )}
+        {/* Tombol mute/suara — sejajar dengan tombol Keluar */}
+        <button
+          onClick={() => { primeAudio(); toggleMute(); }}
+          title={muted ? 'Suara: mati' : 'Suara: nyala'}
+          aria-label={muted ? 'Nyalakan suara' : 'Matikan suara'}
+          style={{
+            width: 40,
+            height: 40,
+            padding: 0,
+            flex: 'none',
+            borderRadius: '50%',
+            border: '1px solid rgba(255,255,255,0.18)',
+            cursor: 'pointer',
+            background: 'rgba(20,20,24,0.6)',
+            backdropFilter: 'blur(8px)',
+            color: '#fff',
+            fontSize: 17,
+            lineHeight: 1,
+            boxShadow: '0 4px 14px rgba(0,0,0,0.35)',
+            transition: 'transform 0.15s, background 0.2s',
+          }}
+          onMouseOver={(e) => (e.currentTarget.style.transform = 'scale(1.1)')}
+          onMouseOut={(e) => (e.currentTarget.style.transform = 'scale(1)')}
+        >
+          {muted ? '🔇' : '🔊'}
+        </button>
+      </div>
 
       {/* Kartu penjelasan area saat tour berjalan */}
       {touring && (
@@ -254,6 +293,14 @@ export function SceneMenu() {
               onClick={() => onNav(n.view)}
               title={n.label}
               aria-label={n.label}
+              onMouseOver={(e) => {
+                if (!active) e.currentTarget.style.background = 'rgba(255,255,255,0.10)'
+                e.currentTarget.style.transform = 'translateY(-2px)'
+              }}
+              onMouseOut={(e) => {
+                if (!active) e.currentTarget.style.background = 'transparent'
+                e.currentTarget.style.transform = 'translateY(0)'
+              }}
               style={{
                 display: 'flex',
                 alignItems: 'center',
@@ -270,7 +317,7 @@ export function SceneMenu() {
                 color: active ? '#1a1a1a' : '#e8e8e8',
                 background: active ? 'linear-gradient(135deg, #ffe1a3, #ffc24d)' : 'transparent',
                 boxShadow: active ? '0 3px 10px rgba(255,194,77,0.45)' : 'none',
-                transition: 'background 0.2s, color 0.2s',
+                transition: 'background 0.2s, color 0.2s, transform 0.15s',
               }}
             >
               <span style={{ fontSize: isMobile ? 18 : 15, lineHeight: 1 }}>{n.icon}</span>
@@ -283,7 +330,7 @@ export function SceneMenu() {
       {/* Modal foto diperbesar (fancy) */}
       {photo && (
         <div
-          onClick={closePhoto}
+          onClick={() => { sfx.close(); closePhoto() }}
           style={{
             position: 'absolute',
             inset: 0,
@@ -318,7 +365,7 @@ export function SceneMenu() {
             }}
           >
             <button
-              onClick={closePhoto}
+              onClick={() => { sfx.close(); closePhoto() }}
               aria-label="Tutup"
               style={{
                 position: 'absolute',
@@ -381,7 +428,7 @@ export function SceneMenu() {
 
       {/* Drawer daftar artikel series (kiri) */}
       {panel === 'series' && series !== null && TUTORIALS[series] && (
-        <Drawer side="left" title={TUTORIALS[series].name} accent={TUTORIALS[series].color} onClose={closePanel}>
+        <Drawer side="left" title={TUTORIALS[series].name} accent={TUTORIALS[series].color} onClose={() => { sfx.close(); closePanel() }}>
           <p style={{ margin: '0 0 14px', fontSize: 12, color: '#9aa' }}>
             {TUTORIALS[series].articles.length} artikel · klik untuk baca di Medium
           </p>
@@ -389,7 +436,7 @@ export function SceneMenu() {
             {TUTORIALS[series].articles.map((a, i) => (
               <li key={i}>
                 <button
-                  onClick={() => openLink(a.url)}
+                  onClick={() => { sfx.click(); openLink(a.url) }}
                   style={{
                     width: '100%',
                     textAlign: 'left',

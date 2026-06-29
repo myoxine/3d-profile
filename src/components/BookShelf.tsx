@@ -12,6 +12,7 @@ import type { GLTF } from 'three-stdlib'
 import { useFocus } from '../store/useFocus'
 import { TUTORIALS, type Article } from '../config/tutorials'
 import { openLink } from '../config/links'
+import { sfx, primeAudio } from '../audio/sound'
 
 type BooksGLTF = GLTF & { nodes: { Book: THREE.Mesh; Sheets: THREE.Mesh } }
 
@@ -100,6 +101,8 @@ function CellBooks({ articles, color }: { articles: Article[]; color: string }) 
         const c = base.clone().multiplyScalar(0.7 + (i % 4) * 0.13)
         const open = (e: { stopPropagation: () => void }) => {
           e.stopPropagation()
+          primeAudio()
+          sfx.click()
           openLink(a.url)
         }
         const over = (e: { stopPropagation: () => void }) => {
@@ -214,6 +217,8 @@ export function BookShelf(props: JSX.IntrinsicElements['group']) {
             position={[cx, cy, 0]}
             onClick={(e) => {
               e.stopPropagation()
+              primeAudio()
+              sfx.open()
               openSeries(series)
             }}
             onPointerOver={(e) => {
