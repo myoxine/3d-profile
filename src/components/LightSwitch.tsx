@@ -7,7 +7,7 @@
 
 import { useRef, useState } from 'react'
 import * as THREE from 'three'
-import { useGLTF } from '@react-three/drei'
+import { useGLTF, Html } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber'
 import type { GLTF } from 'three-stdlib'
 import type { JSX } from 'react'
@@ -34,10 +34,11 @@ const FLIP = 0.22
 
 type SingleSwitchProps = JSX.IntrinsicElements['group'] & {
   on: boolean
+  label: string
   onToggle: () => void
 }
 
-function SingleSwitch({ on, onToggle, ...props }: SingleSwitchProps) {
+function SingleSwitch({ on, label, onToggle, ...props }: SingleSwitchProps) {
   const { nodes, materials } = useGLTF(MODEL) as unknown as GLTFResult
   const pivot = useRef<THREE.Group>(null)
   const [hovered, setHovered] = useState(false)
@@ -60,6 +61,30 @@ function SingleSwitch({ on, onToggle, ...props }: SingleSwitchProps) {
 
   return (
     <group {...props}>
+      {/* tooltip nama lampu + status saat hover */}
+      {hovered && (
+        <Html position={[0, 0.085, 0.02]} center style={{ pointerEvents: 'none' }} zIndexRange={[18, 0]}>
+          <div
+            style={{
+              padding: '5px 10px',
+              borderRadius: 8,
+              whiteSpace: 'nowrap',
+              background: 'rgba(18,18,22,0.94)',
+              color: '#fff',
+              fontSize: 12,
+              fontWeight: 600,
+              fontFamily: 'system-ui, sans-serif',
+              boxShadow: '0 4px 14px rgba(0,0,0,0.5)',
+              border: `1px solid ${on ? '#ffd27a' : 'rgba(255,255,255,0.25)'}`,
+            }}
+          >
+            💡 {label}
+            <span style={{ marginLeft: 6, color: on ? '#ffd27a' : '#8a8a96', fontWeight: 700 }}>
+              {on ? 'NYALA' : 'MATI'}
+            </span>
+          </div>
+        </Html>
+      )}
       {/* Skala supaya plat jadi 0.10 x 0.10 */}
       <group scale={SIZE_SCALE}>
         {/* Berdirikan plat: normalnya (+Y lokal) menghadap -Z (ke dalam ruangan) */}
@@ -123,10 +148,10 @@ export function LightSwitch(props: JSX.IntrinsicElements['group']) {
   // 4 saklar dipusatkan: posisi -1.5,-0.5,0.5,1.5 x spacing
   return (
     <group {...props}>
-      <SingleSwitch on={ceilingOn} onToggle={toggleCeiling} position={[-1.5 * spacing, 0, 0]} />
-      <SingleSwitch on={standingOn} onToggle={toggleStanding} position={[-0.5 * spacing, 0, 0]} />
-      <SingleSwitch on={tableOn} onToggle={toggleTable} position={[0.5 * spacing, 0, 0]} />
-      <SingleSwitch on={sofaOn} onToggle={toggleSofa} position={[1.5 * spacing, 0, 0]} />
+      <SingleSwitch on={ceilingOn} label="Lampu Plafon" onToggle={toggleCeiling} position={[-1.5 * spacing, 0, 0]} />
+      <SingleSwitch on={standingOn} label="Neon Sign" onToggle={toggleStanding} position={[-0.5 * spacing, 0, 0]} />
+      <SingleSwitch on={tableOn} label="Lampu Meja" onToggle={toggleTable} position={[0.5 * spacing, 0, 0]} />
+      <SingleSwitch on={sofaOn} label="Lampu Sofa" onToggle={toggleSofa} position={[1.5 * spacing, 0, 0]} />
     </group>
   )
 }
