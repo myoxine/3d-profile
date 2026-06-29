@@ -6,7 +6,7 @@ By Part 7 the room is alive — people, a ticking clock, glowing neon. But a vis
 
 • A state store (zustand) that works both inside and outside the R3F Canvas
 • Replacing OrbitControls with CameraControls and a set of named “view” presets the camera animates to
-• A bottom menu bar (Beranda · Pencapaian · Portofolio · My Video · Tutorial · Terhubung) that flies you to each area, plus an Exit button
+• A bottom menu bar (Beranda · Education · Experience · My Video · Tutorial Series · Contact Me) that flies you to each area, plus an Exit button
 • Locking interaction per view — the overview rotates freely; a focused view freezes so the framing stays perfect
 • Keeping the camera inside the room so it can never end up staring at the outside wall
 • Clickable 3D objects — click the monitor to focus the desk, click a social cube to open a link
@@ -79,12 +79,12 @@ The menu is a normal React component rendered as a sibling of <Canvas>, not insi
 The menu maps a small config to buttons; clicking one just calls setView:
 
     const NAV = [
-      { view: 'overview', label: 'Beranda',    icon: '🏠' },
-      { view: 'photos',   label: 'Pencapaian', icon: '🏆' },
-      { view: 'desk',     label: 'Portofolio', icon: '🚀' },
-      { view: 'tv',       label: 'My Video',   icon: '🎬' },
-      { view: 'books',    label: 'Tutorial',   icon: '📚' },
-      { view: 'shelf',    label: 'Terhubung',  icon: '🤝' },
+      { view: 'overview', label: 'Beranda',         icon: '🏠' },
+      { view: 'photos',   label: 'Education',       icon: '🎓' },
+      { view: 'desk',     label: 'Experience',      icon: '🚀' },
+      { view: 'tv',       label: 'My Video',        icon: '🎬' },
+      { view: 'books',    label: 'Tutorial Series', icon: '📚' },
+      { view: 'shelf',    label: 'Contact Me',      icon: '🤝' },
     ]
 
 whiteSpace: 'nowrap' matters: “My Video” wrapped to two lines in the pill until we added it.
@@ -161,7 +161,7 @@ When you need to show two things at different heights (the TV and the clock abov
 
     tv: { pos: [-0.55, -0.45, -0.2], target: [-0.55, -0.45, 1.3] }   // level, pulled back
 
-Estimating a preset: target the center of the thing, then choose distance from how wide it is. With a ~50° vertical FOV, horizontal half-width ≈ distance × 0.65 (for a ~1.4 aspect). Five cubes spanning ~1.1 m need distance ≳ 1.0 to fit.
+Estimating a preset: target the center of the thing, then choose distance from how wide it is. With our ~60° vertical FOV, horizontal half-width ≈ distance × 0.8 (for a ~1.4 aspect). Five cubes spanning ~1.1 m need distance ≳ 1.0 to fit.
 
 —  —  —
 
@@ -180,7 +180,7 @@ Always call e.stopPropagation() in 3D click handlers — a ray can hit several m
 
 —  —  —
 
-Step 7 — The “Terhubung” Cubes: Extruded Logos That Spin
+Step 7 — The “Contact Me” Cubes: Extruded Logos That Spin
 
 For the social links we built glowing cubes with a raised brand logo on each face. The logo geometry comes from extruding an SVG path:
 

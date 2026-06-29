@@ -102,7 +102,7 @@ Not all character models are equal. We went through a few:
 
 > 💡 **Keep `morphTargetDictionary` / `morphTargetInfluences`** on the head/teeth/eyelash meshes — that's what preserves the face shape (blendshapes).
 
-These avatars carry an internal `scale={100}` group, so they're ~1.8 m tall at `scale={1}` in the room. To make a **child** we just scale down — `scale={0.78}` ≈ 1.4 m.
+These avatars carry an internal `scale={100}` group, so they're ~1.8 m tall at `scale={1}` in the room. If you ever need someone shorter you just scale the group down (e.g. `scale={0.85}`); our kid is a child-proportioned Ready Player Me avatar, so it stays at `scale={1}`.
 
 ### The painful detour (so you can skip it)
 
@@ -216,8 +216,8 @@ const [sofaOn, setSofa] = useState(false)
 
 ```tsx
 const { sofaOn } = useLighting()
-// shade material: emissiveIntensity={sofaOn ? 1.4 : 0}
-{sofaOn && <pointLight color="#ffd9a0" intensity={1.2} distance={3} />}
+// shade material: emissiveIntensity={sofaOn ? 0.7 : 0}
+{sofaOn && <pointLight color="#ffd9a0" intensity={1} distance={3} decay={1} />}
 ```
 
 > ♻️ **Reuse, don't duplicate.** When we removed the old standing lamp, its switch (`standingOn`) was free — so we repurposed it to toggle the neon sign. One switch, one boolean, any number of lights can subscribe to it.

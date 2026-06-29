@@ -182,7 +182,7 @@ pivotRef.current.rotation.y = Math.sin(time * speed) * maxAngle
 
 A gentle sway makes it feel alive without making your visitors seasick. 😉
 
-> 🔄 **Evolution note (final code).** In the finished project this rocking animation is **disabled** — the `useFrame` rotation is commented out and the chair sits still. Once the room filled up with people, a desktop you focus the camera on, and click-to-focus navigation (Parts 7–9), a perpetually swaying chair became a distraction rather than a delight. The component (`AnimatedSpinningChair` → `GamingChair`) is kept exactly as below; only the one rotation line is commented out. Re-enable it any time by uncommenting `pivotRef.current.rotation.y = angle`.
+> 🔄 **Evolution note (final code).** In the finished project this rocking animation is **disabled** — the `useFrame` rotation is commented out and the chair sits still. Once the room filled up with people, a desktop you focus the camera on, and click-to-focus navigation (Parts 7–9), a perpetually swaying chair became a distraction rather than a delight. In the final code the `useFrame` rocking was stripped out of `GamingChair`, and `AnimatedSpinningChair` is left as a thin positioning wrapper. Re-enable the effect any time by restoring the `useFrame` sine-wave rotation shown above.
 
 ---
 

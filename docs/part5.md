@@ -309,7 +309,10 @@ export function Ceiling({ size = [3, 3], color = '#dCEBFF', ...props }) {
       <mesh position={[-halfX, 0, 0.011]}><boxGeometry args={[0.05, halfY * 2 - 0.05, 0.02]} />{led}</mesh>
 
       {ceilingOn && (
-        <pointLight position={[0, 0, 0.25]} color={color} intensity={5} distance={9} decay={2} castShadow />
+        <>
+          <pointLight position={[0, 0, 0.25]} color={color} intensity={18} distance={14} decay={2} castShadow />
+          <ambientLight color={color} intensity={0.55} />   {/* soft fill so the whole room lifts */}
+        </>
       )}
     </group>
   )

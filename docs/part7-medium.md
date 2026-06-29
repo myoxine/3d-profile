@@ -74,7 +74,7 @@ RPM avatars convert beautifully: separate textured meshes for body, head, hair, 
 
 Keep morphTargetDictionary / morphTargetInfluences on the head/teeth/eyelash meshes — that preserves the face blendshapes.
 
-These avatars carry an internal scale={100} group, so they’re ~1.8 m tall at scale={1}. To make a child we just scale down — scale={0.78} ≈ 1.4 m.
+These avatars carry an internal scale={100} group, so they’re ~1.8 m tall at scale={1}. If you need someone shorter you scale the group down (e.g. scale={0.85}); our kid is a child-proportioned Ready Player Me avatar, so it stays at scale={1}.
 
 The painful detour (so you can skip it)
 

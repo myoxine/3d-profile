@@ -64,7 +64,7 @@ Run it across the folder and the numbers are dramatic — the sofa alone goes **
 ```
 gaming chair.glb   53MB → 2.4MB
 sofa.glb           24MB → 0.5MB
-credenza.glb      4.4MB → 145KB
+credenza.glb      4.4MB → 322KB
 …
 models/ total (props) — tens of MB → a few MB
 ```
@@ -81,7 +81,7 @@ Then we actually *looked* at the chair from the side: the backrest was **shatter
 
 What's maddening is that the **bounding boxes were byte-for-byte identical** before and after — so "did it change scale?" said no. The damage was *inside*: meshopt's vertex quantization mangled this particular dense, ~500k-vertex mesh. On simple props you'd never notice. On a heavy organic model, it's obvious the moment it catches the light.
 
-The fix was a one-word change — **`--compress draco`** — and the chair came back *perfect*, at **1.5 MB** (smaller than meshopt, even). Draco's quantization handled the same geometry without distortion.
+The fix was a one-word change — **`--compress draco`** — and the chair came back *perfect*, at **2.4 MB** (smaller than meshopt, even). Draco's quantization handled the same geometry without distortion.
 
 > 🧠 **The lesson isn't "Draco is better than meshopt."** It's that **lossy geometry compression is lossy**, and "the validator passed + the file is small" tells you *nothing* about whether it still looks right. Open every heavy model and rotate it. The bounding box lies; your eyes don't.
 

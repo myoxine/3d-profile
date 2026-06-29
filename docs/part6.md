@@ -185,8 +185,8 @@ import { Html } from '@react-three/drei'
 import { Model as TvModel } from './TVModel'
 
 const VIDEO_ID = 'pRpeEdMmmQ0'
-const SCREEN_POS = [0.02, 0.39, 0]            // local position of the screen
-const SCREEN_ROT = [0, Math.PI / 2, 0]        // face the room
+const SCREEN_POS = [0, 0.355, 0.004]          // local position of the screen
+const SCREEN_ROT = [0, 0, 0]                   // the TV model already faces +Z; it's rotated at the Room level
 const HTML_SCALE = 0.065                       // tune so the video fills the screen
 
 export function Tv(props) {
@@ -198,7 +198,7 @@ export function Tv(props) {
         <Html
           transform
           occlude="blending"                   // <-- key: respect 3D depth
-          position={[SCREEN_POS[0] + 0.01, SCREEN_POS[1], SCREEN_POS[2]]}
+          position={[SCREEN_POS[0], SCREEN_POS[1], SCREEN_POS[2] + 0.01]}
           rotation={SCREEN_ROT}
           scale={HTML_SCALE}
         >

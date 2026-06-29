@@ -96,7 +96,8 @@ The LED ceiling and both lamps follow the same recipe: swap the bulb/strip mesh 
     // ceiling LED strip
     <meshStandardMaterial color={color} emissive={color}
       emissiveIntensity={ceilingOn ? 2 : 0} toneMapped={false} />
-    {ceilingOn && <pointLight color={color} intensity={5} distance={9} decay={2} castShadow />}
+    {ceilingOn && <pointLight color={color} intensity={18} distance={14} decay={2} castShadow />}
+    {/* plus a soft ambientLight (~0.55) so the whole room lifts, not just under the fixture */}
 
 Tuning real-time lighting is all taste: too bright, lower the pointLight intensity and the bulb’s emissiveIntensity; too much glow, raise Bloom’s threshold or lower its intensity.
 

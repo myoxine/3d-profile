@@ -46,7 +46,7 @@ return (
 )
 ```
 
-> 🧠 **Why not just always use `<Html occlude>`?** drei's `occlude="blending"` works for solid box geometry, but our seated avatar is a **skinned mesh** — the occlusion test doesn't track its animated pose, so the DOM desktop visibly punched *through* the person sitting at the desk. Gating the DOM to the one camera angle where nothing overlaps it sidesteps the whole problem.
+> 🧠 **Why not just always use `<Html occlude>`?** drei's `occlude="blending"` works for solid box geometry, but our seated avatar is a **skinned mesh** — the occlusion test doesn't track its animated pose, so the DOM desktop visibly punched *through* the person sitting at the desk. Gating the DOM to the one camera angle where nothing overlaps it is what actually fixes that. (We still keep `occlude="blending"` on the gated panel as a cheap backstop — it just isn't load-bearing.)
 
 ---
 

@@ -54,7 +54,7 @@ An endlessly spinning chair feels like a carnival ride. A subtle sine-wave rock 
 
 speed sets how fast it rocks, maxAngle how far to each side. A gentle sway makes the scene alive without making anyone seasick.
 
-(Evolution note: in the finished project this rock is switched off — once a character sits in the chair, perpetual motion became a distraction. The code stays; we just comment out the one rotation line.)
+(Evolution note: in the finished project this rock is switched off — once a character sits in the chair, perpetual motion became a distraction. The useFrame rocking is stripped out of GamingChair and AnimatedSpinningChair becomes a thin positioning wrapper; restore the sine-wave useFrame above to bring it back.)
 
 —  —  —
 

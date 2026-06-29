@@ -28,7 +28,7 @@ Let's create a new Vite project using the React + TypeScript template.
 Open your terminal and run:
 
 ```bash
-npm create vite@latest 3d-profile --template react-ts
+npm create vite@latest 3d-profile -- --template react-ts
 cd 3d-profile
 npm install
 ```
